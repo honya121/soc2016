@@ -1,0 +1,44 @@
+1. Úvod
+
+2. Vývoj elektroniky
+2. 1. Desky plošných spojů
+2. 2. SMD součástky
+
+3. Sklad elektronických součástek
+3. 1. Můj podíl
+
+4. Návrh aplikace
+4. 1. Požadavky
+4. 2. Možné přístupy
+4. 2. 1. Zvolený přístup
+4. 3. Použitý hardware a software
+4. 4. Struktura aplikace
+4. 5. Oddělené komponenty aplikace
+
+5. Daemon
+5. 1. Komunikace se skladem
+5. 1. 1. Komunikační protokol
+5. 3. Automatické funkce
+
+6. Databázový model
+
+7. Webové rozhraní
+7. 1. Funkce webu (nějakej use case diagram)
+7. 1. 1. Výběr součástek
+7. 1. 2. Doplnění součástek
+7. 1. 3. Přidání nového typu součástky
+7. 1. 4. Správa databáze typů součástek
+7. 1. 5. Statistiky a historie vkladů
+7. 1. 6. Integrace API velkých obchodů
+7. 2. Struktura webu (stručný popis komponent a jejich propojení)
+7. 3. UX
+7. 3. 1. Responzivní design
+7. 3. 2. AJAX
+7. 4. Autorizace a autentifikace
+7. 5. Optimalizace výkonu
+
+8. Dokumentace
+
+9. Testovací web
+
+10. Závěr

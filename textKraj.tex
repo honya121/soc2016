@@ -1,0 +1,715 @@
+\documentclass[12pt, a4paper, oneside]{article}
+\frenchspacing{}
+
+\usepackage[czech]{babel}
+\usepackage[utf8]{inputenc}
+%\usepackage[IL2]{fontenc}
+\usepackage{wrapfig}
+\usepackage{graphicx,amsmath}
+\usepackage[monochrome]{color}
+\usepackage{setspace}
+\usepackage{fullpage}
+
+\author{Jan Priessnitz}
+\title{Automatizovaný sklad elektronických součástek}
+
+    \makeatletter
+    \renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+      {-3.25ex\@plus -1ex \@minus -.2ex}%
+      {1.5ex \@plus .2ex}%
+      {\normalfont\normalsize\bfseries}}
+    \makeatother
+
+\begin{document}
+
+\hoffset = 0mm
+
+% tituln� strana
+\pagestyle{empty} % vynech� ��slov�n�
+
+%\voffset = -20mm % posun za��tku textu v��
+\enlargethispage{60mm} % zv�t�� oblast tisku pro tuto str�nku
+
+\begin{center}
+
+\Large \textbf{STŘEDOŠKOLSKÁ ODBORNÁ ČINNOST}
+
+\vspace{60mm}
+
+\huge %\LARGE
+\textbf{Automatizovaný sklad elektronických součástek}
+% na tituln� stran� m��e b�t stru�n�j��, pokud je to pot�eba
+
+\Large
+
+\vspace{90mm}
+
+
+\textbf{Jan Priessnitz} \\
+
+\vspace{40mm}
+
+\textbf{Brno 2016}
+
+
+\end{center}
+
+\newpage % konec tituln� strany
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% vnit�n� tituln� strana
+%\voffset = -20mm % posun za��tku textu v��
+\enlargethispage{60mm} % zv�t�� oblast tisku pro tuto str�nku
+
+\begin{center}
+
+\Large \textbf{STŘEDOŠKOLSKÁ ODBORNÁ ČINNOST}  \\
+\vspace{10mm}
+ \normalsize
+\textbf{Obor SOČ:  18. Informatika}
+% ��slo a n�zev -- vypln�me spolu
+
+\vspace{45mm}
+
+\LARGE %\huge
+\textbf{Automatizovaný sklad elektronických součástek}
+\end{center}
+\large
+
+\vspace{50mm}
+
+
+\begin{tabbing}
+\hspace{10mm} \= \hspace{30mm}  \=   \kill % nastaven� zar��ek
+  \> \textbf{Autor:}  \> \textbf{Jan Priessnitz}        \\
+  \>              \>                               \\[8mm]
+  \> \textbf{Škola:}   \> \textbf{Gymnázium Brno, tř. Kpt. Jaroše,}     \\
+  \>              \> \textbf{příspěvková organizace}    \\[8mm]
+
+  %\> \textbf{Konzultant:} \> Mgr. �sp��n� -- pou�ije se, kdy� bude pot�eba
+\end{tabbing}
+
+\vspace{20mm}
+
+\begin{center}
+\textbf{Brno 2016}
+
+\end{center}
+\normalsize
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage  % Prohlášení
+%\voffset = 0mm % posun začátku textu zpět
+
+~ % mus� to tu b�t, aby fungovala svisl� mezera
+
+\vspace{10mm}
+
+\section*{Prohlášení}
+
+
+Prohlašuji, že jsem svou práci vypracoval samostatně, použil jsem pouze
+podklady (literaturu, SW atd.) citované v~práci a~uvedené v~přiloženém seznamu.
+
+Dále prohlašuji, že tištěná i elektronická verze práce SOČ jsou shodné a nemám závažný důvod proti zpřístupňování této práce v souladu se zákonem č. 121/2000 Sb., o právu autorském, o právech souvisejících s právem autorským a změně některých zákonů (autorský zákon) v platném znění.
+
+\vspace{20mm}
+
+ V~Brně  dne: \today{}    \hspace{50mm}                 podpis:
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage   % Poděkov�n� -- nepovinn�
+
+~ % mus� to tu b�t, aby fungovala svisl� mezera
+
+\vspace{90mm}
+
+\section*{Poděkování}
+
+Děkuji Jaroslavu Páralovi, mému školiteli, za obrovskou pomoc a mnoho užitečných rad a připomínek při práci na SOČ.
+
+Dále děkuji Domu dětí a mládeže Helceletova za poskytnutí zázemí, především Jakubovi Streitovi za užitečné rady a připomínky.
+
+ Tato práce byla vypracována za finanční podpory JMK a~JCMM.
+
+\hfill\\[\intextsep]
+\begin{minipage}{\textwidth}
+\begin{center}
+\includegraphics[scale=0.28]{img/loga_podekovani.png}
+\end{center}
+\end{minipage}
+\vspace{2mm}
+\normalsize
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage   % Anotace
+~ % mus� to tu b�t, aby fungovala svisl� mezera
+\vspace{10mm}
+
+\section*{Anotace}
+
+Cílem práce je vyvinout řídicí webovou aplikaci pro automatizovaný sklad elektronických součástek, který usnadňuje skladování a manupulaci s těmito součástkami. Sklad je určen na součástky v pouzdře pro povrchovou montáž (SMD), kde je manuální skladování z důvodu malých rozměrů součástek náročné a neefektivní. Výhody skladu spočívají v jednoduché údržbě, rychlém výdeji součástek a bezproblémovém využití skladu více uživateli.
+Webová aplikace slouží jako primární rozhraní pro ovládání skladu. Dalšími funkcemi jsou správa uživatelů, databáze a evidence součástek a zpracování dat do statistik.
+
+
+\paragraph{Klíčová slova:}
+
+automatizace, skladování, SMD součástky, webová aplikace, evidence
+
+\vspace{60mm}
+\newpage
+%\section*{Anotation }
+
+
+\section*{Abstract}
+
+The aim of this work is to develop a web application for automated storage machine for electronic parts, which simplifies manipulation and storage of these parts. Storage machine is designed to store solid mounted devices (SMDs). These parts are very small and manual storage is difficult and inefficient. The advantages of the storage machine are easy maintenance, fast part retrieval and non-problematic usage of the storage machine by multiple users.
+
+\paragraph{Keywords:}
+
+automation, storage, solid mounted devices, web application, records
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+
+\setcounter{page}{1}  % nastav� ��ta� str�nek znovu od jedn�
+
+
+\tableofcontents{}
+
+\newpage
+
+\pagestyle{plain}
+
+\section*{Úvod}  %zde bude vyuziti, stanoveni cilu, mozna celkova struktura SW, mozna spojit s pouzitymi technologiemi
+
+Předmětem práce je řídící aplikace pro automatizovaný sklad SMD součástek. Narozdíl od ručního skladování SMD součástek je práce se skladem i jeho údržba jednoduchá pro uživatele a časově nenáročná. Mezi hlavní vlastnosti a funkce skladu s řídící aplikací patří:
+\begin{itemize}
+\item Přístup ke skladu pomocí intuitivního webového rozhraní.
+\item Jednoduchý a rychlý výběr součástek s více možnostmi navolení těchto součástek (z tabulek podle druhu a vlastnosti nebo z partlist souboru\footnote{Soubor partlist obsahuje seznam součástek např. pro konkrétní projekt. Generují jej programy pro návrh elektroniky (např. Eagle)})
+\item Databáze typů součástek, která zjednodušuje doplňování a další nakupování součástek.
+\end{itemize}
+
+\section{Motivace}
+
+Elektronika je dnes všude kolem nás a málokdo by si dnes bez ní dokázal svět představit. Jen v České republice vyvíjí elektroniku tisíce lidí (ať už v práci, nebo ve volném čase). Nedílnou součástí drtivé většiny elektroniky jsou desky plošných spojů. Ty jsou nejčastěji osazovány speciálními součástkami určenými přímo pro ně. Tyto součástky se nazývají SMD součástky (solid mounted devices - součástky v pouzdře pro povrchovou montáž). Ve výrobě je osazování desek a skladování SMD součástek plně automatizováno, ale ve vývoji desek plošných spojů se často desky osazují ručně a vzniká problém skladování SMD součástek.
+
+\subsection{SMD součástky}
+
+SMD součástky jsou speciálním typem součástek. Jsou určené k použití jen při výrobě desek plošných spojů a proto jsou velmi malé (mají rozměry řádově v milimetrech) a prodávají se ve velkých množstvích zalepené v dlouhých papírových páscích (zhruba 1 cm širokých). Konvenční skladování těchto součástek (např. ručně v šuplících) je proto velmi náročné. Druhů součástek je mnoho a často nejsou nijak označené, takže je složité a pomalé vybírat nebo doplňovat součástky a zároveň udržovat ve skladu pořádek, obzvláště pokud sklad využívá více lidí. Také je těžké udržet přehled nad počty součástek ve skladu a jednoduše se může stát, že nějaký typ součástky neočekávaně dojde a je nutné typ doobjednat. To všechno vývoj zpomaluje a tím pádem i prodražuje. Tento problém jsme řešili i na Robotárně\footnote{Dům dětí a mládeže Helceletova}.
+
+\subsection{Současná situace}
+
+Dnes bohužel žádné řešení na tento problém neexistuje. Velké vývojové firmy mají vlastní sklady, které ale nejsou plně automatizované. Asi nejpodobnější zařízení skladu SMD součástek je osazovací zařízení, které automaticky osazuje desky plošných spojů SMD součástkami. To má ale často kapacitu jen na pár desítek kusů součástek a jeho cena se pohybuje řádově ve statisících.
+
+\subsection{Řešení}
+
+S kolegy jsme se proto rozhodli vyvinout automatizovaný sklad SMD součástek, který má tyto problémy vyřešit.
+Součástky jsou skladovány na jednom místě na páscích namotaných na kotoučích. Sklad tyto součástky automaticky vydává na povel uživatele přes webové uživatelské rozhraní. Tímto se rapidně sníží potřebný čas k vybrání součástky ve skladu, jelikož člověk již nemusí hledat pásek se součástkou, vysunout jej a ustřihnout příslušný počet součástek.
+Aplikace bežící ve skladu navíc bude uchovávat informace o počtech kusů součástek a historii výběrů. Správce skladu pak může z aktuálních stavů součástek zjistit, zda je potřeba dokoupit nějaký druh součástky, případně ze statistik o výběrech součástek naplánovat další nákup. Díky hromadnému nákupu součástek tak může výrazně ušetřit.
+Sklad může být využíván také v obchodech s elektronikou, které zažívají stejné problémy, jako vývojová pracoviště.
+
+Celý projekt jsme rozdělili na 3 části. Mojí prací na tomto projektu je naprogramovat řídicí aplikaci s uživatelským rozhraním. Návrhem elektroniky a mechaniky skladu se zabývají dva mí kolegové.
+
+
+\newpage
+
+\section{Sklad elektronických součástek}
+
+
+\begin{minipage}{\textwidth}
+\begin{center}
+\includegraphics[scale=0.40]{img/sklad.JPG}
+\\
+\caption{Obr. 1: přední pohled na sklad}
+\end{center}
+\end{minipage}
+\vspace{4mm}
+
+Sklad je zhruba 1,5 m dlouhý a 0,5 m široký. Součástky jsou skladovány v zadní části buď volně (krátké ústřižky), nebo na kotoučích. V přední části se na kolejnicích pohybuje stříhací hlava, která pásky vytahuje a následně stříhá. V levé části skladu je umístěn elektrický zdroj, servomotory s drivery\footnote{Servomotor je typ nízkootáčkového motoru. Servomotor je nutné řídit speciální elektronikou (drivery).}, elektroniku a microPC Raspberry Pi, na kterém běží řídící aplikace. Sklad lze rozšiřovat o další patra, takže kapacita skladu je variabilní. V každém patře je 70 přihrádek, takže není problém vyrobit sklad se stovkami přihrádek.
+
+\subsection{Můj podíl}
+
+Práce mých kolegů končí u návrhu a naprogramování vnitřní elektroniky skladu. Mým podílem je řídící aplikace, která na jedné straně přijímá příkazy od uživatele a na straně druhé posílá data po sériové lince do vnitřní elektroniky. Veškerá má práce se proto odehrává na Raspberry Pi.
+
+\section{Návrh aplikace}
+
+\subsection{Požadavky}
+
+Nejdříve jsem si definoval požadavky na funkce a jiné vlastnosti aplikace, abych později mohl zvolit vyhovující hardware a software:
+
+\begin{enumerate}
+\item \textbf{uživatelské rozhraní} - Sebelepší aplikace se neobejde bez uživatelů. Proto je jednou z hlavních uživatelská přívětivost. Aplikace by měla být přehledná a její používání rychlé a intuitivní.
+\item \textbf{mnoho funkcí} - Jádro aplikace umožní uživateli vybrat součástku ze skladu. Aplikace by ale mohla uživateli dále usnadnit používání skladu mnoha přidanými funkcemi (např. databáze součástek, integrace API\footnote{Application programming interface - rozhraní, pomocí kterého mohou cizí aplikace jednoduše přistupovat k funkcím obchodu} obchodů s elektronikou).
+\item \textbf{rozumná rychlost} - Přestože je rychlost celého skladu limitována hlavně rychlostí stříhací hlavy, měla by aplikace stíhat zpracovávat přístupy vícero uživatelů v rozumném čase, aby nezpomalovala práci uživatelů.
+\item \textbf{nízké nároky} - Hardware, na kterém aplikace běží, by měl spotřebovávat co nejméně elektřiny a neměl by zabírat moc místa. Také by měl být levný, aby se jeho cena minimálně promítla do celkové ceny skladu.
+\item \textbf{dostupnost} - Uživatel by neměl být omezován ve výběru zařízení, se kterým bude sklad ovládat. Aplikace by měla být dostupná na všechny typy zařízení.
+\end{enumerate}
+
+\subsection{Možné přístupy}
+
+Po definování požadavků na aplikaci úřipadalo v úvahu několik možností, jak by aplikace vypadala:
+
+\begin{enumerate}
+\item \textbf{Server + klientská aplikace} - Na skladu běží jen serverová část aplikace, která nízkoúrovňově komunikuje s klientskou aplikací. Tento přístup nemá velké nároky na sklad a je rychlý. Problém nastává u přenositelnosti aplikace. Pro každé zařízení by bylo potřeba psát novou klientskou aplikaci. Obecně je také složitější navrhnout kvalitní uživatelské prostředí pro nativní aplikace\footnote{Aplikace běžící přímo na zařízení. Protikladem mohou být například webové aplikace}.
+\item \textbf{Modul pro eshop systém} - Další možností bylo využít jako frontend/footnote{Část aplikace, která komunikuje s uživatelem (uživatelské rozhraní). Protikladem je backend, který obvykle provádí vnitřní procesy aplikace.} již existující eshopový systém a rozšířít jej o modul zajišťující komunikaci se skladem. Výhodou je zdánlivě velmi podobná architektura, kdy si uživatel vybírá součástky a poté si je koupí (vybere ze skladu). Při bližším pohledu jsou bohužel vidět rozdíly: eshopové systémy kladou velký důraz na způsob dopravy, platbu, ceny, aj.
+\item \textbf{Webová aplikace} - Nakonec jsem se rozhodl jít cestou webové aplikace. Hlavní výhoda spočívá v dostupnosti ze všech zařízení, ale i v přívětivosti uživatelského prostředí. Přestože náročnost je o trochu větší, než u prvního přístupu, stále se jedná o rychlé a relativně nenáročné řešení.
+\end{enumerate}
+
+
+\subsection{Použitý hardware a software}
+
+Jako zařízení, na kterém aplikace poběží, jsem zvolil microPC Raspberry Pi. Výkon Raspberry Pi je pro webovou aplikaci dostatečný a spotřeba nepřekračuje 5 W, takže je energeticky nenáročné. Výhodou je také cena, která se pohybuje okolo 1000 Kč. Pro Raspberry Pi existuje linuxová distribuce\footnote{linuxová distribuce - operační systém postavený na jádře Linux} Raspbian, která poskytuje široký výběr softwaru.
+
+Místo abych některé součásti aplikace psal sám a znovu vynalézal kolo, snažil jsem se využít již dostupný software. Některé volby konkrétního softwaru mají svá opodstatnění. Jindy jsem si vybíral jednoduše podle toho, jestli již mám s nějakým softwarem zkušenosti:
+
+\begin{enumerate}
+\item \textbf{Apache web server} - standardní linuxový web server
+\item \textbf{jazyk PHP} - asi nejpoužívanější jazyk pro psaní webových aplikací. Pro jazyk PHP existuje mnoho knihoven a frameworků\footnote{framework - nástavba na určitý jazyk, která usnadňuje vývoj aplikací}.
+\item \textbf{Nette Framework} - jednoduchý, ale kvalitní framework pro jazyk PHP
+\item \textbf{Bootstrap} - knihovna CSS slplp
+\item \textbf{Doctrine 2} - PHP knihovna pro definování databázové struktury
+\item \textbf{MySQL} - databázový server
+\item \textbf{jazyk Python} - skriptovací jazyk. Užitečný při tvorbě výkonově nenáročných aplikací
+\end{enumerate}
+
+\subsection{Struktura aplikace}
+
+tady bude obrázek
+
+Aplikaci jsem rozdělil na několik částí, které budou vykonávat různé funkce a budou vzájemně komunikovat:
+\begin{enumerate}
+\item \textbf{daemon}\footnote{Daemon je označení pro aplikaci, která běží na pozadí a neustále} - čte příkazy z databáze a posílá je po sériové lince do skladu. Zpracovává chyby, které mu sklad nahlásí a provádí automatické funkce aplikace (např. posílání upozornění emailem).
+\item \textbf{databáze} - zprostředkovává komunikaci mezi daemonem a webovým rozhraním. Také je to jediné místo, kam se ukládají data aplikace.
+\item \textbf{webové rozhraní} - poskytuje uživatelské rozhraní a komunikuje s uživatelem. Uživatelské příkazy zapisuje do databáze.
+\end{enumerate}
+
+\subsection{Architektura MVC}
+
+Architektura MVC (Model-View-Controller) je návrh aplikace, který se ji snaží rozdělit na více částí, které spolu co nejméně souvisí.
+V ideálním případě to znamená, že budu moci jednu z částí nahradit, aniž bych musel upravovat ostatní části.
+MVC konkrétně rozděluje aplikaci na 3 části:
+
+\begin{enumerate}
+\item Model - část aplikace, která se stará o ukládání dat. Ostatní části aplikace přes ni přistupují k informacím.
+\item View - stará se o prezentování dat získaných od modelu uživateli a zprostředkování komunikace mezi uživatelem a Controllerem.
+\item Controller - vykonává všechny logické operace a příkazy aplikace, které jsou vyvolány přes view a upravují data přes model.
+\end{enumerate}
+
+Výhodou webové aplikace je to, že architekturu MVC respektuje a jednotlivé komponenty jsou striktně oddělené. Kdyby uživatel z nějakého důvodu potřeboval, aby části aplikace běžely na různých strojích, není to problém. Jediná část, která musí na skladu běžet, je daemon. Ostatní části aplikace pak mohou běžet vzdáleně a komunikace může probíhat po síti.
+
+\section{Daemon}
+
+
+\section{Popis databáze}  %zde bude popis datového modelu (nějaký UML) +mozna popis pouzite technologie
+\hoffset = 0mm
+Pro ukládání dat jsem použil databázový server MySQL.
+
+
+\begin{center}
+\hspace*{-2cm}
+\includegraphics[scale=0.91]{img/entity_diagram.png}
+\\
+\caption{Obr. 3: UML diagram struktury databáze skladu}
+\end{center}
+\vspace{2mm}
+
+\newpage
+\subsection{Seznam entit}
+
+Databázový model má celkem 5 entit.
+\begin{itemize}
+\item User
+\item Part
+\item Socket
+\item Queue
+\item History
+\end{itemize}
+
+\subsubsection{User}
+
+Entita User popisuje uživatele aplikace:
+\begin{itemize}
+\item id
+\item username - uživatelské jméno
+\item passwordHash - hash hesla uživatele
+\item role
+\item name - reálné jméno uživatele
+\item email
+\end{itemize}
+
+\subsubsection{Part}
+
+Entita Part popisuje součástku v databázi součástek:
+\begin{itemize}
+\item id
+\item name - název součástky
+\item width - šířka
+\item length - délka
+\item description - popis
+\end{itemize}
+
+\subsubsection{Socket}
+
+Entita Socket popisuje jednu přihrádku z aktuálního rozložení přihrádek ve skladu:
+\begin{itemize}
+\item id
+\item part - odkaz na součástku právě uloženou v přihrádce
+\item level - patro
+\item position - pozice
+\item amount - aktuální počet součástek
+\item available - kolik je aktuálně možné vybrat součástek
+\end{itemize}
+
+
+\subsubsection{QueueEntry}
+
+Entita QueueEntry popisuje jeden záznam ve frontě:
+\begin{itemize}
+\item id
+\item user - odkaz na uživatele, který výběr zadal
+\item part - odkaz na součástku, která byla objednána
+\item socket - odkaz na přihrádku, ze které se má vybírat
+\item state - stav požadavku (nevyřešen, provádí se, chyba)
+\item created - čas vytvoření požadavku
+\item amount - počet součástek k vybrání
+\end{itemize}
+
+
+
+\subsubsection{HistoryEntry}
+
+Entita HistoryEntry popisuje jeden záznam (vybrání nebo doplnění) z historie:
+\begin{itemize}
+\item id
+\item state - stav požadavku (dokončeno, chyba)
+\item created - čas vytvoření požadavku
+\item user - uživatelské jméno uživatele
+\item part - název součástky
+\item level - patro. ze kterého se vybíralo
+\item position - pozice, ze které se vybíralo
+\item amount - vybraný počet
+\end{itemize}
+
+
+\section{Popis webového prostředí}  %popis webového prostředí (nějaký Use case UML), možná přiblížení technologie, popis jednotlivých částí
+
+\subsection{Funkce}
+
+\begin{minipage}{\textwidth}
+\begin{center}
+\hspace*{-2cm}
+\includegraphics[scale=0.69]{img/use_case_uml.png}
+\\
+\caption{Obr. 4: Use case diagram aplikace}
+\end{center}
+\end{minipage}
+\vspace{4mm}
+
+
+Přední funkcí webu bude navolení a součástek a zařazení jich do fronty na vybrání.
+Web bude mít ale kromě vydávání součástek ještě několik dalších praktických funkcí, které bude moci vykonávat nezávisle na zařízení.
+
+\subsubsection{Změna stavů součástek v přihrádkách (Doplňování součástek)}
+
+Web bude umět zobrazit množství součástek v jednotlivých přihrádkách v přehledné tabulce. Tuto tabulku bude moci uživatel měnit (a s ní i hodnoty v databázi), když například doplňuje součástky.
+
+\subsubsection{Správa přihrádek}
+
+Uživatel bude moci jednoduše změnit typy součástek v jednotlivých přihrádkách a měnit jejich polohu.
+
+\subsubsection{Databáze součástek}
+
+Jakmile uživatel přidá nějakou součástku, uloží se do databáze její jméno, obrázek a popis. Kromě toho se uloží také šířka a délka, což jsou hodnoty potřebné pro zařízení.
+Výhledově budou v databázi uloženy i vlastnosti součástky a uživatel si bude moci vybrat součástku jednoduše podle vlastností.
+
+\subsubsection{Databáze obchodů}
+
+Pro všechny součástky v databázi bude možnost uložit i odkazy na webové stránky součástek v obchodech s elektronikou, takže uživatel si uživatel bude moci rychle vybrat, kde součástku nakoupí, bez zbytečného hledání.
+Do budoucna počítám i s implementací API některých obchodů do aplikace. Aplikace tak bude moci např. automaticky upozornit uživatele, že nějaká součástka dochází a odkáže ho na obchod s nejnižší cenou.
+
+\subsubsection{Správa uživatelů}
+
+Uživatelé budou mít různá přístupová práva a ti s vyššími přístupovými právy budou moci vytvořit nový uživatelský učet, nebo změnit nebo smazat již existující s nižšími právy.
+
+\subsubsection{Fronta příkazů}
+
+Web bude umět zobrazit frontu všech příkazů v tabulce. Uživatel bude poté moci příkaz smazat, nebo jej posunout ve frontě. Pokud nastane chyba, uživatel se z tabulky dozví, jaký přikaz chybu způsobil a bude moci zkusit příkaz provést znovu,
+nebo jej přeskočit.
+
+\subsubsection{Historie příkazů}
+
+Po provedení příkazu se řádek v databázi v tabulce fronty příkazů přesune do tabulky historie. Uživatel si na webu bude moci prohlédnout historii příkazů ve zvoleném časovém úseku.
+
+\subsection{Nette framework}
+
+Nette je PHP framework pro tvorbu dynamických webových aplikací. Poskytuje mnoho předprogramovaných funkcí např. pro přístup k databázi nebo k autentifikaci a autorizaci.
+Nette framework jsem použil především kvůli šablonovacímu systému a jednoduchému vytváření bezpečných formulářů. Vytváření webových aplikací v Nette je rozděleno podle architektury MVC. Nejprve je potřeba napsat presenter. To je třída, která zpracovává všechna data (např. z databáze) a připravuje je do šablony. Kromě toho také připravuje všechny formuláře a jiné webové komponenty. Následně se zavolá šablona dané stránky, do které se vloží všechny proměnné a komponenty připravené v presenteru. Odděleně se programují logické části aplikace (např. vlastní autentifikace), které s šablonou nesouvisí.
+
+\begin{minipage}{\textwidth}
+\begin{center}
+\includegraphics[scale=0.45]{img/code_presenter.png}
+\\
+\caption{Obr. 5: Ukázka kódu presenteru}
+\end{center}
+\end{minipage}
+\vspace{4mm}
+
+\begin{minipage}{\textwidth}
+\begin{center}
+\includegraphics[scale=0.45]{img/code_template.png}
+\\
+\caption{Obr. 6: Ukázka kódu šablony}
+\end{center}
+\end{minipage}
+\vspace{4mm}
+
+\subsection{Autentifikace a autorizace}
+
+
+Kvůli bezpečnosti jsem do aplikace implementoval autentifikaci (přihlašování) a autorizaci (přístup k jednotlivým funkcím webu na základě uživatelských práv). Autentifikaci budu řešit
+jednoduše pomocí jména a hesla. Autorizaci budu řešit pomocí rolí. Každý uživatel bude mít určité role, které mu dovolí přistupovat k určitým funkcím. Role jsem zatím rozdělil jednoduše.
+Každý uživatelský účet bude mít roli user, která ho bude opravňovat k základním funkcím (vybírání, doplňování součástek). Dále role manager (správce), který bude mít
+přístup skoro je všem funkcím, kromě správy uživatelských účtů, kde bude moci manipulovat pouze se základními účty s rolí user. Role administrator bude umět manipulovat
+i s účty s rolemi manager a administrator.
+
+\subsection{Uživatelské prostředí}
+
+\begin{minipage}{\textwidth}
+\begin{center}
+\includegraphics[scale=0.31]{img/web.png}
+\\
+\caption{Obr. 7: Screenshot webového rozhraní}
+\end{center}
+\end{minipage}
+\vspace{4mm}
+
+Aplikaci budou využívat různí uživatelé, takže je potřeba věnovat velkou pozornost uživatelskému prostředí. Mělo by být především jednoduché a intuitivní, ale také by se mělo dát rychle používat a mělo by umět přehledně prezentovat data.
+Snažil jsem se také o to, aby nejpoužívanější funkce byly dostupné na co nejméně kliků, zatímco méně používané funkce budou hůře dostupné. Myslím si totiž, že kdybych všechny funkce učinil
+lehce dostupné, znepřehlednilo by to prostředí.
+
+\subsubsection{Hlavní komponenty prostředí}
+
+\paragraph{Navigační lišta}
+
+
+\mbox{}
+\begin{minipage}{\textwidth}
+\begin{center}
+\includegraphics[scale=0.5]{img/web_navbar.png}
+\\
+\caption{Obr. 8: Navigační lišta}
+\end{center}
+\end{minipage}
+\vspace{4mm}
+
+Navigaci po webu na jednotlivé stránky funkcí jsem řešil přes navigační lištu na horním okraji stránky. Zde bude vedle sebe několik odkazů na jednotlivé funkce a několik rozbalovacích seznamů s odkazy na funkce, které jsou podobné (jinak by se vše na lištu nevešlo).
+Například několik stránek pro správu přihrádek je sdruženo do jednoho rozbalovacího seznamu. Na pravém okraji lišty je tlačítko pro odhlášení (odhlašovací tlačítko na pravém okraji navigační lišty považuji za dobrou konvenci, takže jsem ho tam také umístil).
+Navigační lišta také bude záviset na právech uživatele. Uživateli se budou ukazovat pouze odkazy na funkce, ke kterým má přístupová práva.
+
+
+\paragraph{Přihlašování}
+
+\mbox{}
+\begin{minipage}{\textwidth}
+\begin{center}
+\includegraphics[scale=0.5]{img/web_prihlaseni.png}
+\\
+\caption{Obr. 9: Navigační lišta}
+\end{center}
+\end{minipage}
+\vspace{4mm}
+
+Pro přihlašování jsem zvolil řešení prázdné stránky jen s přihlašovacím formulářem. Nebude totiž potřeba prezentovat web jednotlivých skladů nezaregistrovaným uživatelům a ti zaregistrovaní ocení, že nebudou muset přihlašovací formulář hledat.
+
+\subsubsection{Funkce prostředí}
+
+\paragraph{Vybírání součástek}
+
+\\
+\begin{minipage}{\textwidth}
+\begin{center}
+\includegraphics[scale=0.5]{img/web_vybrat_soucastky.png}
+\\
+\caption{Obr. 10: Vybírání součástek}
+\end{center}
+\end{minipage}
+\vspace{4mm}
+
+Jelikož je vybírání součástek nejdůležitější a nejpoužívanější funkcí aplikace, na liště na ni odkazuje hned první odkaz.
+Na stránce bude tabulka všech druhů součástek, které jsou momentálně ve skladu a bude u nich aktuální počet. Vedle každé součástky bude malé vyplňovací pole, které bude přijímat pouze čísla
+a tlačítko 'Vybrat'.
+
+\paragraph{Doplňování součástek}
+
+\\
+\begin{minipage}{\textwidth}
+\begin{center}
+\includegraphics[scale=0.5]{img/web_doplnit_soucastky.png}
+\\
+\caption{Obr. 11: Doplňování součástek}
+\end{center}
+\end{minipage}
+\vspace{4mm}
+
+Doplňování součástek nebude tak moc používaná funkce. Proto jsem se rozhodl začlenit ji do seznamu 'Správa přihrádek' na navigační liště. Uživateli se zobrazí všechny
+přihrádky se součástkami a bude moci změnit množství součástek v přihrádce (i zmenšit), kterou si vybere.
+
+\paragraph{Správa přihrádek}
+
+\\
+\begin{minipage}{\textwidth}
+\begin{center}
+\includegraphics[scale=0.5]{img/web_seznam_prihradek.png}
+\\
+\caption{Obr. 12: Seznam přihrádek}
+\end{center}
+\end{minipage}
+\vspace{4mm}
+
+Uživatel bude moci jednoduše spravovat všechny přihrádky. Na navigační liště bude odkaz tabulku přihrádek, kde bude moci přihrádku smazat, uvolnit (odstranit součástku z příhrádky)
+a prohlásit ji za chybovou (systém nedovolí s chybovou přihrádkou pracovat).
+Dále bude moci přes formulář vytvořit novou, nebo změnit její parametry (pokud se sklad fyzicky mění).
+
+\paragraph{Správa součástek}
+
+\begin{minipage}{\textwidth}
+\begin{center}
+\includegraphics[scale=0.5]{img/web_seznam_soucastek.png}
+\\
+\caption{Obr. 13: Seznam součástek}
+\end{center}
+\end{minipage}
+\vspace{4mm}
+
+Aplikace bude mít svoji databázi součástek, kterou budou uživatelé moci měnit a součástky z ní přiřazovat do přihrádek.
+Na navigační liště bude odkaz na tabulku součástek, kde uvidí všechny součástky pohromadě a zjistí jejich parametry, případně se může podívat na dokumentaci nebo obrázek.
+Z této tabulky je možné součástku upravit, smazat, nebo přiřadit do přihrádky. Novou součástku bude moci do databáze zadat pomocí formuláře.
+
+\paragraph{Správa obchodů}
+
+Na navigační liště bude ve skupině 'Spravovat součástky' také odkaz na tabulku obchodů, kde bude moci upravit nebo smazat obchod z databáze. Nový obchod bude moci zadat přes formulář.
+Součástku může uživatel k obchodu přiřadit přes odkaz v tabulce součástek. Objeví se mu formulář, kam zadá URL stránky součástky v obchodě. Tyto vztahy mezi součástkami a obchody si poté bude moci prohlédnout
+v detailu součástky.
+
+\paragraph{Fronta}
+
+\newpage
+
+\begin{figure}{\textwidth}
+\begin{center}
+\includegraphics[scale=0.5]{img/web_fronta.png}
+\\
+\caption{Obr. 14: Fronta}
+\end{center}
+\end{figure}
+
+
+Uživatel si bude moci prohlédnout také všechny příkazy ve frontě. Z tabulky může zjistit, jaké součástky jsou ve frontě, kdo příkaz zadal, nebo také jestli nenastala nějaká chyba.
+Správce bude moci mazat příkazy z fronty.
+
+\section{Popis daemonu} %možná použít radši něco jako hlavní program, zde bude blizsi nahled na pouzite technologie, mozna nejaky snippety a celkove popis jak to funguje a popis funkci (a rozepsat se o modularite)
+
+Jak jsem již zmínil, daemon bude naprogramovaný v jazyku Python. Jeho funkce by měly být:
+
+\begin{itemize}
+\item Inicializace skladu
+\item Posílání příkazů skladu
+\item Zpracování chyb skladu
+\item Posílání emailových upozornění
+\end{itemize}
+
+\subsection{Autostart}
+
+Daemon bude běžet po celou dobu. To znamená, že se spustí vždy automaticky po startu. Automatické spouštění po startu se v Linuxu dá vyřešit mnoha způsoby. Já jsem využil soubor /etc/rc.local, ve kterém jsou zapsány všechny příkazy, které se po spuštění systému spustí s rootovskými právy. Bez rootovských práv by aplikace nemohla běžet, jelikož využívá přístup k GPIO a sériové lince.
+
+\subsection{Struktura daemonu}
+
+Daemon jsem psal za použití objektově orientovaného programování (třídy), jelikož se daemon dá jednoduše rozdělit na několik částí a také to bude část aplikace, která se bude často upravovat a rozšiřovat (zatímco databáze a webové rozhraní jsou na skladu nezávislé, daemon je naprogramován na míru jednomu zařízení). Použitím objektově orientovaného programování bych chtěl zajistit znovupoužitelnost stávajícího kódu v modifikacích daemonu a přehlednost pro budoucí programátory.
+
+Hlavní třída Daemon bude mít metodu loop(), která bude běžet opakovaně a bude zastávat funkci hlavní smyčky programu. Dále třída Database bude poskytovat high-level přístup k databázi (např. třída bude poskytovat přímo jednotlivé příkazy z databáze a samostatně po provedení příkazů upraví data v databázi). Třída Notification bude kontrolovat, zda nemá poslat emailové upozornění, a tato upozornění posílat. Nejdůležitější bude třída StoreInterface, která bude obstarávat komunikaci se zařízením. Bude skladu posílat příkazy a zpracovávat odpovědi a případné chyby.
+
+\subsection{Posílání emailových upozornění}
+
+Pro posílání emailů jsem použil Python SMTP knihovnu smptlib. Upozornění by se měla posílat jednak v reakci na specifická data v databázi (málo součástek na skladu) a také v reakci na chyby skladu, které si žádají pozornost člověka (např. chyba při stříhání pásku).
+
+\subsection{Popis komunikačního protokolu}
+
+Pro komunikaci mezi daemonem a skladem bylo potřeba navrhnout komunikační protokol. Obě strany budou komunikovat přes sériovou linku (UART) pomocí povelů. Předmětem komunikace pomocí UART je sice proud bytů, přesto jsem jako základní komunikační jednotku zvolil paket, který se bude skládat z několika bytů. Pro paket jsem rozhodl kvůli povaze komunikace (posílání povelů). Povely se totiž dají jednoduše posílat jako pakety.
+
+\subsubsection{Popis paketu}
+
+%schema paketu
+\vspace{3mm}
+\begin{center}
+\begin{tabular}{| l | l |}
+\hline
+1. byte & start byte \\ \hline
+2. byte & číslo paketu \\ \hline
+3. byte & číslo příkazu \\ \hline
+4. byte & délka argumentů / 1. argument \\ \hline
+5. - ?. byte & další argumenty \\ \hline
+\end {tabular}
+\\
+\vspace{1mm}
+\caption{Tabulka 1: Popis paketu}
+\end{center}
+
+
+Každý paket je tvořen byty. Maximální délka každého paketu je 64 bytů.
+Přestože komunikace probíhá po sériové lince, která je krátká a neměly by nastávat žádné chyby, jsou v paketu zahrnuty bezpečností prvky, které by případné chyby měly eliminovat.
+Paket vždy začíná bytem 0x80 (start byte), který by měl zajišťovat to, že v případě neočekávaného vložení nebo odstranění bytu z datového proudu žádná strana nebude číst stream 'posunutě' (tím by se zásadně změnil význam paketu). Hodnota 0x80 je zvolena kvůli svému zápisu v binární soustavě (01000000), který je speciální a je málo pravděpodobné, že by taková posloupnost bitů vznikla chybou (např. šumem).
+2. bytem je číslo paketu, které je zde také kvůli bezpečnosti. Pokud totiž jedna strana pošle paket, na který má druhá strana odpovědět dalším paketem, je potřeba, aby první strana věděla, jestli, a na jaký paket jí přichází odpověd. Jelikož se do 1 bytu vejde jen hodnota do 255, bude toto číslo přetékat. To by ale neměl být problém (pravděpodobnost, že by jeden paket 'předběhl' 255 dalších je zanedbatelná).
+3. bytem je číslo příkazu (viz tabulku číslo 2).
+Dalšími byty jsou argumetry příkazu. Pokud je z čísla příkazu možné jednoznačně určit počet argumentů, hned 4. bytem začínají argumenty. Pokud ne, ve 4. bytu je délka argumentů, které začínají až 5. bytem.
+
+
+Dalším bezpečnostím prvkem jsou také příkazy ACK a NACK, které jsou poslány jako odpověd na každý příkaz.
+
+\begin{center}
+\begin{tabular}{| l | l | p{10 cm} |}
+\hline
+Číslo příkazu & Název & Popis \\ \hline
+0x00 & NACK & not acknowledged - odpověď na příkaz, který nebyl úspěšně proveden; následuje kód chyby \\ \hline
+0x01 & ACK & acknowledged - odpověd na úspešně vykonaný příkaz, podle toho, na jaký příkaz odpovídá, může mít další argumenty \\ \hline
+0x02 & move & posun na dané místo, následují 2 byty s pozicí (Uint16) \\ \hline
+0x03 & pull & vytáhnutí kusu pásku z přihrádky, následují 2 byty s počtem dírek, které se mají vytáhnout (Uint16) \\ \hline
+0x04 & cut & ustřihnutí vytáhnutého kusu pásky, nemá argumenty \\ \hline
+0x05 & init & inicializaci - zařízení po startu dojede s hlavou na oba konce, aby zkalibrovalo motory a zjistilo přesnou polohu, nemá argumenty \\ \hline
+0x06 & power & napájení krokových motorů - příkaz je potřeba provést ještě před inicializací, nemá argumenty \\ \hline
+\end{tabular}
+\\
+\vspace{1mm}
+\caption{Tabulka 2: Přehled příkazů}
+\end{center}
+\vspace{6mm}
+
+
+\newpage
+
+\section*{Závěr} %co do budoucna, splneni cilu
+
+Podle požadovaných funkcí a parametrů jsem navrhl strukturu aplikace pro automatizovaný sklad součástek, kterou  jsem následně vyvinul a nasadil na reálné zařízení.
+Aplikace zjednodušuje přístup k zařízení a jeho obsluhu a rozšiřuje funkce skladu o evidenci součástek ve skladu, nástroje pro správu skladu a nákup součástek a upozorňování uživatelů na dané události.
+
+Do budoucna s kolegy počítáme s rozšířením skladu na více pater a zavedení přihrádek o různých šířkách. Aplikace je na toto připravená, ale bude potřeba ji o tyto možnosti rozšířit.
+Kromě toho bych chtěl aplikaci rozšířit o další funkce, které nesouvisí s mechanikou skladu. Především bych chtěl přidat funkci třídění součástek na webu podle jejich vlastností, vybírání součástek stylem nakupování v eshopech, vybrání všech součástek na daný projekt podle souboru se seznamem součástek, ale také integraci API velkých obchodů s elektronikou do aplikace. Také chceme přizpůsobit sklad pro využití v obchodech s elektronikou
+Při testování aplikace jsem také narazil na některé nevýhody stávající architektury. Proto chci znovu navrhnout architekturu některých částí aplikace a tyto části podle nové architektury znovu implementovat. Také bych rád zpřehlednil kód aplikace (přidal anotace funkcí a proměnných, sjednotil styl kódování).
+
+
+
+\newpage
+
+\section*{Seznam použité literatury a softwaru}
+
+\begin{itemize}
+\item Oficiální webové stránky projektu Raspberry Pi - http://www.raspberrypi.org/
+\item Oficiální webové stránky jazyka PHP - http://php.net/
+\item Oficiální webové stránky jazyka Python - https://www.python.org/
+\item Oficiální webové stránky frameworku Nette - http://nette.org/cs/
+\item Oficiální webové stránky databázového serveru MySQL - http://www.mysql.com/
+\item Oficiální webové stránky knihovny Bootstrap - http://getbootstrap.com/
+\item Oficiální webové stránky modelovacího programu Modelio - https://www.modelio.org/
+\end{itemize}
+
+\end{document}
