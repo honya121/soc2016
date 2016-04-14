@@ -21,7 +21,7 @@
     \makeatother
 
 \begin{document}
-
+\renewcommand{\baselinestretch}{1.5}
 \hoffset = 0mm
 
 % tituln� strana
@@ -144,11 +144,11 @@ Dále děkuji Domu dětí a mládeže Helceletova za poskytnutí zázemí, před
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage   % Anotace
 ~ % mus� to tu b�t, aby fungovala svisl� mezera
-\vspace{10mm}
+\vspace{5mm}
 
 \section*{Anotace}
 
-Cílem práce je vyvinout řídicí webovou aplikaci pro automatizovaný sklad elektronických součástek, který usnadňuje skladování a manupulaci s těmito součástkami. Sklad je určen na součástky v pouzdře pro povrchovou montáž (SMD), kde je manuální skladování z důvodu malých rozměrů součástek náročné a neefektivní. Výhody skladu spočívají v jednoduché údržbě, rychlém výdeji součástek a bezproblémovém využití skladu více uživateli.
+Cílem práce je vyvinout řídicí webovou aplikaci pro automatizovaný sklad elektronických součástek, který usnadňuje skladování a manupulaci s těmito součástkami. Sklad je určen na součástky v pouzdře pro povrchovou montáž (SMD), kde je manuální skladování z důvodu malých rozměrů součástek náročné a neefektivní. Výhody skladu spočívají v okamžitém výdeji součástek, automatickém uchovávání informací o množství součástek ve skladu a bezproblémovém využití skladu více uživateli.
 Webová aplikace slouží jako primární rozhraní pro ovládání skladu. Dalšími funkcemi jsou správa uživatelů, databáze a evidence součástek a zpracování dat do statistik.
 
 
@@ -156,14 +156,11 @@ Webová aplikace slouží jako primární rozhraní pro ovládání skladu. Dal�
 
 automatizace, skladování, SMD součástky, webová aplikace, evidence
 
-\vspace{60mm}
-\newpage
-%\section*{Anotation }
-
+\vspace{18mm}
 
 \section*{Abstract}
 
-The aim of this work is to develop a web application for automated storage machine for electronic parts, which simplifies manipulation and storage of these parts. Storage machine is designed to store solid mounted devices (SMDs). These parts are very small and manual storage is difficult and inefficient. The advantages of the storage machine are easy maintenance, fast part retrieval and non-problematic usage of the storage machine by multiple users.
+The aim of this work is to develop a web application for automated storage machine for electronic parts, which simplifies manipulation and storage of these parts. Storage machine is designed to store solid mounted devices (SMDs). These parts are very small and manual storage is difficult and inefficient. The advantages of the storage machine are instant part retrieval, automatic storage of data about each part amount and non-problematic usage of the storage machine by multiple users.
 
 \paragraph{Keywords:}
 
@@ -182,17 +179,21 @@ automation, storage, solid mounted devices, web application, records
 \pagestyle{plain}
 
 \section*{Úvod}  %zde bude vyuziti, stanoveni cilu, mozna celkova struktura SW, mozna spojit s pouzitymi technologiemi
+\addcontentsline{toc}{section}{Úvod}
 
 Předmětem práce je řídící aplikace pro automatizovaný sklad SMD součástek. Narozdíl od ručního skladování SMD součástek je práce se skladem i jeho údržba jednoduchá pro uživatele a časově nenáročná. Mezi hlavní vlastnosti a funkce skladu s řídící aplikací patří:
 \begin{itemize}
-\item Přístup ke skladu pomocí intuitivního webového rozhraní.
-\item Jednoduchý a rychlý výběr součástek s více možnostmi navolení těchto součástek (z tabulek podle druhu a vlastnosti nebo z partlist souboru\footnote{Soubor partlist obsahuje seznam součástek např. pro konkrétní projekt. Generují jej programy pro návrh elektroniky (např. Eagle)})
-\item Databáze typů součástek, která zjednodušuje doplňování a další nakupování součástek.
+\item Přístup ke skladu pomocí intuitivního webového rozhraní
+\item Okamžitý výběr požadovaných součástek
+\item Uchovávání informací o aktuálním množství součástek ve skladu
+\item Databáze typů součástek, která zjednodušuje doplňování a další nakupování součástek
 \end{itemize}
+
+\newpage
 
 \section{Motivace}
 
-Elektronika je dnes všude kolem nás a málokdo by si dnes bez ní dokázal svět představit. Jen v České republice vyvíjí elektroniku tisíce lidí (ať už v práci, nebo ve volném čase). Nedílnou součástí drtivé většiny elektroniky jsou desky plošných spojů. Ty jsou nejčastěji osazovány speciálními součástkami určenými přímo pro ně. Tyto součástky se nazývají SMD součástky (solid mounted devices - součástky v pouzdře pro povrchovou montáž). Ve výrobě je osazování desek a skladování SMD součástek plně automatizováno, ale ve vývoji desek plošných spojů se často desky osazují ručně a vzniká problém skladování SMD součástek.
+Elektronika je dnes všude kolem nás a málokdo by si dnes bez ní dokázal svět představit. Jen v České republice vyvíjí elektroniku tisíce lidí (ať už v práci, nebo ve volném čase). Nedílnou součástí drtivé většiny elektroniky jsou desky plošných spojů. Ty jsou nejčastěji osazovány speciálními součástkami určenými přímo pro ně. Tyto součástky se nazývají SMD součástky (solid mounted devices - součástky v pouzdře pro povrchovou montáž). Ve velkovýrobě je osazování desek a skladování SMD součástek plně automatizováno, ale ve vývoji a malovýrobě desek plošných spojů se často desky osazují ručně a vzniká problém jak při skladování SMD součástek, tak již při návrhu, kdy vývojář neví, jestli je na skladě dostatek potřebných součástek.
 
 \subsection{SMD součástky}
 
@@ -205,9 +206,9 @@ Dnes bohužel žádné řešení na tento problém neexistuje. Velké vývojové
 \subsection{Řešení}
 
 S kolegy jsme se proto rozhodli vyvinout automatizovaný sklad SMD součástek, který má tyto problémy vyřešit.
-Součástky jsou skladovány na jednom místě na páscích namotaných na kotoučích. Sklad tyto součástky automaticky vydává na povel uživatele přes webové uživatelské rozhraní. Tímto se rapidně sníží potřebný čas k vybrání součástky ve skladu, jelikož člověk již nemusí hledat pásek se součástkou, vysunout jej a ustřihnout příslušný počet součástek.
+Součástky jsou skladovány na jednom místě buď na páscích namotaných na kotoučích, nebo volně na ústřižcích pásků. Možnost skladovat i ústřižky pásků je obzvláště v malovýrobě velmi užitečná. Sklad tyto součástky automaticky vydává na povel uživatele přes webové uživatelské rozhraní. Tímto se rapidně sníží potřebný čas k vybrání součástky ve skladu, jelikož člověk již nemusí hledat pásek se součástkou, vysunout jej a ustřihnout příslušný počet součástek.
 Aplikace bežící ve skladu navíc bude uchovávat informace o počtech kusů součástek a historii výběrů. Správce skladu pak může z aktuálních stavů součástek zjistit, zda je potřeba dokoupit nějaký druh součástky, případně ze statistik o výběrech součástek naplánovat další nákup. Díky hromadnému nákupu součástek tak může výrazně ušetřit.
-Sklad může být využíván také v obchodech s elektronikou, které zažívají stejné problémy, jako vývojová pracoviště.
+Sklad může být využíván také v obchodech s elektronickými součástkami, které zažívají stejné problémy, jako vývojová pracoviště.
 
 Celý projekt jsme rozdělili na 3 části. Mojí prací na tomto projektu je naprogramovat řídicí aplikaci s uživatelským rozhraním. Návrhem elektroniky a mechaniky skladu se zabývají dva mí kolegové.
 
@@ -232,6 +233,8 @@ Sklad je zhruba 1,5 m dlouhý a 0,5 m široký. Součástky jsou skladovány v z
 
 Práce mých kolegů končí u návrhu a naprogramování vnitřní elektroniky skladu. Mým podílem je řídící aplikace, která na jedné straně přijímá příkazy od uživatele a na straně druhé posílá data po sériové lince do vnitřní elektroniky. Veškerá má práce se proto odehrává na Raspberry Pi.
 
+\newpage
+
 \section{Návrh aplikace}
 
 \subsection{Požadavky}
@@ -240,7 +243,7 @@ Nejdříve jsem si definoval požadavky na funkce a jiné vlastnosti aplikace, a
 
 \begin{enumerate}
 \item \textbf{uživatelské rozhraní} - Sebelepší aplikace se neobejde bez uživatelů. Proto je jednou z hlavních uživatelská přívětivost. Aplikace by měla být přehledná a její používání rychlé a intuitivní.
-\item \textbf{mnoho funkcí} - Jádro aplikace umožní uživateli vybrat součástku ze skladu. Aplikace by ale mohla uživateli dále usnadnit používání skladu mnoha přidanými funkcemi (např. databáze součástek, integrace API\footnote{Application programming interface - rozhraní, pomocí kterého mohou cizí aplikace jednoduše přistupovat k funkcím obchodu} obchodů s elektronikou).
+\item \textbf{mnoho funkcí} - Jádro aplikace umožní uživateli vybrat součástku ze skladu. Aplikace by ale mohla uživateli dále usnadnit používání skladu mnoha přidanými funkcemi (např. databáze součástek, integrace API\footnote{Application programming interface - rozhraní, pomocí kterého mohou cizí aplikace jednoduše přistupovat k funkcím obchodu} obchodů s elektronickými součástkami).
 \item \textbf{rozumná rychlost} - Přestože je rychlost celého skladu limitována hlavně rychlostí stříhací hlavy, měla by aplikace stíhat zpracovávat přístupy vícero uživatelů v rozumném čase, aby nezpomalovala práci uživatelů.
 \item \textbf{nízké nároky} - Hardware, na kterém aplikace běží, by měl spotřebovávat co nejméně elektřiny a neměl by zabírat moc místa. Také by měl být levný, aby se jeho cena minimálně promítla do celkové ceny skladu.
 \item \textbf{dostupnost} - Uživatel by neměl být omezován ve výběru zařízení, se kterým bude sklad ovládat. Aplikace by měla být dostupná na všechny typy zařízení.
@@ -297,6 +300,8 @@ MVC konkrétně rozděluje aplikaci na 3 části:
 \end{enumerate}
 
 Výhodou webové aplikace je to, že architekturu MVC respektuje a jednotlivé komponenty jsou striktně oddělené. Kdyby uživatel z nějakého důvodu potřeboval, aby části aplikace běžely na různých strojích, není to problém. Jediná část, která musí na skladu běžet, je daemon. Ostatní části aplikace pak mohou běžet vzdáleně a komunikace může probíhat po síti.
+
+\newpage
 
 \section{Daemon}
 
@@ -369,6 +374,7 @@ Dalším bezpečnostím prvkem jsou také příkazy ACK a NACK, které jsou posl
 \caption{Tabulka 2: Přehled příkazů}
 \end{center}
 
+\newpage
 
 \section{Databáze}  %zde bude popis datového modelu (nějaký UML) +mozna popis pouzite technologie
 
@@ -387,6 +393,7 @@ Data se v databázi ukládají formou objektů, které jsou mezi sebou databázo
 \item \textbf{HistoryEntry} - záznam o výběru. Obsahuje informace o již proběhlém příkazu. Po úspěšném zpracování položky ve frontě se vytvoří záznam o výběru a uloží se do databáze.
 \end{itemize}
 
+\newpage
 
 \section{Webové rozhraní}  %popis webového prostředí (nějaký Use case UML), možná přiblížení technologie, popis jednotlivých částí
 
@@ -451,7 +458,7 @@ V případě, že nějaká součástka dochází, stačí, aby správce skladu v
 
 \subsubsection{Databáze součástek}
 
-Aby mohli uživatelé vyhledávat mezi součástkami na skladu, je potřeba, aby byly o každé součástce na skladu informace v databázi součástek. Přidávání součástky do skladu tedy může být velmi pracné, ale opak je pravdou. Díky integraci API obchodů s elektronikou stačí vyfotit čárový kód na kotouči se součástkami a web se o zbytek postará. V případě, že již součástka v databázi existuje, přiřadí ji do přihrádky. V případě, že součástka ještě v databázi není, automaticky ji i se všemi vlastnostmi přidá. Díky standardu HTML 5 mohou nově webové aplikace používat fotoaparát v mobilu. Správce skladu tedy jen vyfotí čárový kód, zadá číslo přihrádky, do které chce součástku přidat, a je hotovo.
+Aby mohli uživatelé vyhledávat mezi součástkami na skladu, je potřeba, aby byly o každé součástce na skladu informace v databázi součástek. Přidávání součástky do skladu tedy může být velmi pracné, ale opak je pravdou. Díky integraci API obchodů s elektronickými součástkami stačí vyfotit čárový kód na kotouči se součástkami a web se o zbytek postará. V případě, že již součástka v databázi existuje, přiřadí ji do přihrádky. V případě, že součástka ještě v databázi není, automaticky ji i se všemi vlastnostmi přidá. Díky standardu HTML 5 mohou nově webové aplikace používat fotoaparát v mobilu. Správce skladu tedy jen vyfotí čárový kód, zadá číslo přihrádky, do které chce součástku přidat, a je hotovo.
 
 \subsubsection{Integrace API obchodů s elektonickými součástkami}
 
@@ -470,14 +477,11 @@ Při testování aplikace na Raspberry Pi se bohužel objevily problémy s rychl
 \newpage
 
 \section*{Závěr} %co do budoucna, splneni cilu
+\addcontentsline{toc}{section}{Závěr}
 
-Podle požadovaných funkcí a parametrů jsem navrhl strukturu aplikace pro automatizovaný sklad součástek, kterou  jsem následně vyvinul a nasadil na reálné zařízení.
-Aplikace zjednodušuje přístup k zařízení a jeho obsluhu a rozšiřuje funkce skladu o evidenci součástek ve skladu, nástroje pro správu skladu a nákup součástek a upozorňování uživatelů na dané události.
+Sklad momentálně funguje na Domu dětí a mládeže Helceletova a využívá se. Aplikaci dále vyvíjím podle požadavků uživatelů.
 
-Do budoucna s kolegy počítáme s rozšířením skladu na více pater a zavedení přihrádek o různých šířkách. Aplikace je na toto připravená, ale bude potřeba ji o tyto možnosti rozšířit.
-Kromě toho bych chtěl aplikaci rozšířit o další funkce, které nesouvisí s mechanikou skladu. Především bych chtěl přidat funkci třídění součástek na webu podle jejich vlastností, vybírání součástek stylem nakupování v eshopech, vybrání všech součástek na daný projekt podle souboru se seznamem součástek, ale také integraci API velkých obchodů s elektronikou do aplikace. Také chceme přizpůsobit sklad pro využití v obchodech s elektronikou
-Při testování aplikace jsem také narazil na některé nevýhody stávající architektury. Proto chci znovu navrhnout architekturu některých částí aplikace a tyto části podle nové architektury znovu implementovat. Také bych rád zpřehlednil kód aplikace (přidal anotace funkcí a proměnných, sjednotil styl kódování).
-
+V blízké budoucnosti bych chtěl především přidat možnost součástky si rezervovat na nějaký projekt a poté je hromadně vydat. Také bych chtěl postupně integrovat API více obchodů s elektronickými součástkami a zvyšit tak výběr pro zákazníka. Další možností v rozvoji je přizpůsobení aplikace pro využití ve fyzických obchodech s elektronickými součástkami k prodeji SMD součástek.
 
 
 \newpage
