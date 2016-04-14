@@ -461,7 +461,7 @@ Kromě obrovského zjednodušení přidávání součástek má integrace API ob
 
 Web umí vykreslovat mnoho různých grafů a generovat výtahy z dat o výběrech součástek. Správce skladu může tyto statistiky využít například při plánování nákupu součástek a předpovědět, kdy bude potřeba součástky dokoupit. Pokud bude například kupovat více součástek najendou v jedné objednávce, může výrazně ušetřit za dopravu.
 
-\subsubsection{Optimalizace výkonu}
+\subsection{Optimalizace výkonu}
 
 Při testování aplikace na Raspberry Pi se bohužel objevily problémy s rychlostí aplikace. Načítání stránky trvalo i 5 sekund a celkově byla aplikace pomalá. Zjistil jsem, že problém není v rychosti procesoru nebo nedostatku operační paměti, ale v rychlosti SD karty. Nette Framework využívá pro vylepšení výkonu cachování\footnote{cachování - ukládání výpočtů na disk a pozdější opětovné využití za účelem snížení nároků na výpočetní výkon}, takže si ukládá velké množství souborů krátkodobě na SD kartu. Na běžném serveru se standardním hard diskem by to nebyl problém, ale na Raspberry Pi s pomalou SD kartou to výrazně zpomaluje celou aplikaci. Proto jsem na Raspberry Pi nainstaloval PHP OPCache, která způsobuje, že se ke cachování místo SD karty využívá operační pamět, která je mnohonásobně rychlejší. Problém se tímto vyřešil a aplikace teď běží dostatečně rychle.
 
