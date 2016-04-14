@@ -1,51 +1,47 @@
 \select@language {czech}
 \contentsline {paragraph}{Kl\IeC {\'\i }\IeC {\v c}ov\IeC {\'a} slova:}{5}
 \contentsline {paragraph}{Keywords:}{6}
-\contentsline {section}{\numberline {1}Motivace}{3}
-\contentsline {subsection}{\numberline {1.1}SMD sou\IeC {\v c}\IeC {\'a}stky}{3}
-\contentsline {subsection}{\numberline {1.2}Sou\IeC {\v c}asn\IeC {\'a} situace}{3}
-\contentsline {subsection}{\numberline {1.3}\IeC {\v R}e\IeC {\v s}en\IeC {\'\i }}{4}
-\contentsline {section}{\numberline {2}Sklad elektronick\IeC {\'y}ch sou\IeC {\v c}\IeC {\'a}stek}{5}
-\contentsline {subsection}{\numberline {2.1}M\IeC {\r u}j pod\IeC {\'\i }l}{6}
-\contentsline {section}{\numberline {3}N\IeC {\'a}vrh aplikace}{6}
-\contentsline {subsection}{\numberline {3.1}Po\IeC {\v z}adavky}{6}
-\contentsline {subsection}{\numberline {3.2}Mo\IeC {\v z}n\IeC {\'e} p\IeC {\v r}\IeC {\'\i }stupy}{7}
-\contentsline {subsection}{\numberline {3.3}Pou\IeC {\v z}it\IeC {\'y} hardware a software}{7}
-\contentsline {subsection}{\numberline {3.4}Struktura aplikace}{8}
-\contentsline {subsection}{\numberline {3.5}Architektura MVC}{8}
-\contentsline {section}{\numberline {4}Daemon}{9}
-\contentsline {section}{\numberline {5}Popis datab\IeC {\'a}ze}{9}
-\contentsline {subsection}{\numberline {5.1}Seznam entit}{10}
-\contentsline {subsubsection}{\numberline {5.1.1}User}{10}
-\contentsline {subsubsection}{\numberline {5.1.2}Part}{10}
-\contentsline {subsubsection}{\numberline {5.1.3}Socket}{10}
-\contentsline {subsubsection}{\numberline {5.1.4}QueueEntry}{11}
-\contentsline {subsubsection}{\numberline {5.1.5}HistoryEntry}{11}
-\contentsline {section}{\numberline {6}Popis webov\IeC {\'e}ho prost\IeC {\v r}ed\IeC {\'\i }}{12}
-\contentsline {subsection}{\numberline {6.1}Funkce}{12}
-\contentsline {subsubsection}{\numberline {6.1.1}Zm\IeC {\v e}na stav\IeC {\r u} sou\IeC {\v c}\IeC {\'a}stek v p\IeC {\v r}ihr\IeC {\'a}dk\IeC {\'a}ch (Dopl\IeC {\v n}ov\IeC {\'a}n\IeC {\'\i } sou\IeC {\v c}\IeC {\'a}stek)}{12}
-\contentsline {subsubsection}{\numberline {6.1.2}Spr\IeC {\'a}va p\IeC {\v r}ihr\IeC {\'a}dek}{12}
-\contentsline {subsubsection}{\numberline {6.1.3}Datab\IeC {\'a}ze sou\IeC {\v c}\IeC {\'a}stek}{12}
-\contentsline {subsubsection}{\numberline {6.1.4}Datab\IeC {\'a}ze obchod\IeC {\r u}}{12}
-\contentsline {subsubsection}{\numberline {6.1.5}Spr\IeC {\'a}va u\IeC {\v z}ivatel\IeC {\r u}}{13}
-\contentsline {subsubsection}{\numberline {6.1.6}Fronta p\IeC {\v r}\IeC {\'\i }kaz\IeC {\r u}}{13}
-\contentsline {subsubsection}{\numberline {6.1.7}Historie p\IeC {\v r}\IeC {\'\i }kaz\IeC {\r u}}{13}
-\contentsline {subsection}{\numberline {6.2}Nette framework}{13}
-\contentsline {subsection}{\numberline {6.3}Autentifikace a autorizace}{14}
-\contentsline {subsection}{\numberline {6.4}U\IeC {\v z}ivatelsk\IeC {\'e} prost\IeC {\v r}ed\IeC {\'\i }}{14}
-\contentsline {subsubsection}{\numberline {6.4.1}Hlavn\IeC {\'\i } komponenty prost\IeC {\v r}ed\IeC {\'\i }}{15}
-\contentsline {paragraph}{Naviga\IeC {\v c}n\IeC {\'\i } li\IeC {\v s}ta}{15}
-\contentsline {paragraph}{P\IeC {\v r}ihla\IeC {\v s}ov\IeC {\'a}n\IeC {\'\i }}{15}
-\contentsline {subsubsection}{\numberline {6.4.2}Funkce prost\IeC {\v r}ed\IeC {\'\i }}{16}
-\contentsline {paragraph}{Vyb\IeC {\'\i }r\IeC {\'a}n\IeC {\'\i } sou\IeC {\v c}\IeC {\'a}stek}{16}
-\contentsline {paragraph}{Dopl\IeC {\v n}ov\IeC {\'a}n\IeC {\'\i } sou\IeC {\v c}\IeC {\'a}stek}{16}
-\contentsline {paragraph}{Spr\IeC {\'a}va p\IeC {\v r}ihr\IeC {\'a}dek}{17}
-\contentsline {paragraph}{Spr\IeC {\'a}va sou\IeC {\v c}\IeC {\'a}stek}{18}
-\contentsline {paragraph}{Spr\IeC {\'a}va obchod\IeC {\r u}}{18}
-\contentsline {paragraph}{Fronta}{18}
-\contentsline {section}{\numberline {7}Popis daemonu}{19}
-\contentsline {subsection}{\numberline {7.1}Autostart}{19}
-\contentsline {subsection}{\numberline {7.2}Struktura daemonu}{20}
-\contentsline {subsection}{\numberline {7.3}Pos\IeC {\'\i }l\IeC {\'a}n\IeC {\'\i } emailov\IeC {\'y}ch upozorn\IeC {\v e}n\IeC {\'\i }}{20}
-\contentsline {subsection}{\numberline {7.4}Popis komunika\IeC {\v c}n\IeC {\'\i }ho protokolu}{20}
-\contentsline {subsubsection}{\numberline {7.4.1}Popis paketu}{20}
+\contentsline {section}{\numberline {1}Motivace}{2}
+\contentsline {subsection}{\numberline {1.1}SMD sou\IeC {\v c}\IeC {\'a}stky}{2}
+\contentsline {subsection}{\numberline {1.2}Sou\IeC {\v c}asn\IeC {\'a} situace}{2}
+\contentsline {subsection}{\numberline {1.3}\IeC {\v R}e\IeC {\v s}en\IeC {\'\i }}{3}
+\contentsline {section}{\numberline {2}Sklad elektronick\IeC {\'y}ch sou\IeC {\v c}\IeC {\'a}stek}{4}
+\contentsline {subsection}{\numberline {2.1}M\IeC {\r u}j pod\IeC {\'\i }l}{5}
+\contentsline {section}{\numberline {3}N\IeC {\'a}vrh aplikace}{5}
+\contentsline {subsection}{\numberline {3.1}Po\IeC {\v z}adavky}{5}
+\contentsline {subsection}{\numberline {3.2}Mo\IeC {\v z}n\IeC {\'e} p\IeC {\v r}\IeC {\'\i }stupy}{6}
+\contentsline {subsection}{\numberline {3.3}Pou\IeC {\v z}it\IeC {\'y} hardware a software}{6}
+\contentsline {subsection}{\numberline {3.4}Struktura aplikace}{7}
+\contentsline {subsection}{\numberline {3.5}Architektura MVC}{7}
+\contentsline {section}{\numberline {4}Daemon}{8}
+\contentsline {subsection}{\numberline {4.1}Komunikace se skladem}{8}
+\contentsline {subsubsection}{\numberline {4.1.1}Paket}{9}
+\contentsline {section}{\numberline {5}Datab\IeC {\'a}ze}{9}
+\contentsline {section}{\numberline {6}Webov\IeC {\'e} rozhran\IeC {\'\i }}{10}
+\contentsline {subsection}{\numberline {6.1}Funkce}{10}
+\contentsline {subsubsection}{\numberline {6.1.1}Zm\IeC {\v e}na stav\IeC {\r u} sou\IeC {\v c}\IeC {\'a}stek v p\IeC {\v r}ihr\IeC {\'a}dk\IeC {\'a}ch (Dopl\IeC {\v n}ov\IeC {\'a}n\IeC {\'\i } sou\IeC {\v c}\IeC {\'a}stek)}{10}
+\contentsline {subsubsection}{\numberline {6.1.2}Spr\IeC {\'a}va p\IeC {\v r}ihr\IeC {\'a}dek}{11}
+\contentsline {subsubsection}{\numberline {6.1.3}Datab\IeC {\'a}ze sou\IeC {\v c}\IeC {\'a}stek}{11}
+\contentsline {subsubsection}{\numberline {6.1.4}Datab\IeC {\'a}ze obchod\IeC {\r u}}{11}
+\contentsline {subsubsection}{\numberline {6.1.5}Spr\IeC {\'a}va u\IeC {\v z}ivatel\IeC {\r u}}{11}
+\contentsline {subsubsection}{\numberline {6.1.6}Fronta p\IeC {\v r}\IeC {\'\i }kaz\IeC {\r u}}{11}
+\contentsline {subsubsection}{\numberline {6.1.7}Historie p\IeC {\v r}\IeC {\'\i }kaz\IeC {\r u}}{11}
+\contentsline {subsection}{\numberline {6.2}Nette framework}{11}
+\contentsline {subsection}{\numberline {6.3}Autentifikace a autorizace}{12}
+\contentsline {subsection}{\numberline {6.4}U\IeC {\v z}ivatelsk\IeC {\'e} prost\IeC {\v r}ed\IeC {\'\i }}{13}
+\contentsline {subsubsection}{\numberline {6.4.1}Hlavn\IeC {\'\i } komponenty prost\IeC {\v r}ed\IeC {\'\i }}{13}
+\contentsline {paragraph}{Naviga\IeC {\v c}n\IeC {\'\i } li\IeC {\v s}ta}{13}
+\contentsline {paragraph}{P\IeC {\v r}ihla\IeC {\v s}ov\IeC {\'a}n\IeC {\'\i }}{14}
+\contentsline {subsubsection}{\numberline {6.4.2}Funkce prost\IeC {\v r}ed\IeC {\'\i }}{14}
+\contentsline {paragraph}{Vyb\IeC {\'\i }r\IeC {\'a}n\IeC {\'\i } sou\IeC {\v c}\IeC {\'a}stek}{14}
+\contentsline {paragraph}{Dopl\IeC {\v n}ov\IeC {\'a}n\IeC {\'\i } sou\IeC {\v c}\IeC {\'a}stek}{15}
+\contentsline {paragraph}{Spr\IeC {\'a}va p\IeC {\v r}ihr\IeC {\'a}dek}{15}
+\contentsline {paragraph}{Spr\IeC {\'a}va sou\IeC {\v c}\IeC {\'a}stek}{16}
+\contentsline {paragraph}{Spr\IeC {\'a}va obchod\IeC {\r u}}{16}
+\contentsline {paragraph}{Fronta}{16}
+\contentsline {section}{\numberline {7}Popis daemonu}{17}
+\contentsline {subsection}{\numberline {7.1}Autostart}{17}
+\contentsline {subsection}{\numberline {7.2}Struktura daemonu}{18}
+\contentsline {subsection}{\numberline {7.3}Pos\IeC {\'\i }l\IeC {\'a}n\IeC {\'\i } emailov\IeC {\'y}ch upozorn\IeC {\v e}n\IeC {\'\i }}{18}
+\contentsline {subsection}{\numberline {7.4}Popis komunika\IeC {\v c}n\IeC {\'\i }ho protokolu}{18}
+\contentsline {subsubsection}{\numberline {7.4.1}Popis paketu}{18}

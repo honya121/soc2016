@@ -291,108 +291,85 @@ V ideálním případě to znamená, že budu moci jednu z částí nahradit, an
 MVC konkrétně rozděluje aplikaci na 3 části:
 
 \begin{enumerate}
-\item Model - část aplikace, která se stará o ukládání dat. Ostatní části aplikace přes ni přistupují k informacím.
-\item View - stará se o prezentování dat získaných od modelu uživateli a zprostředkování komunikace mezi uživatelem a Controllerem.
-\item Controller - vykonává všechny logické operace a příkazy aplikace, které jsou vyvolány přes view a upravují data přes model.
+\item \textbf{Model} - část aplikace, která se stará o ukládání dat. Ostatní části aplikace přes ni přistupují k informacím.
+\item \textbf{View} - stará se o prezentování dat získaných od modelu uživateli a zprostředkování komunikace mezi uživatelem a Controllerem.
+\item \textbf{Controller} - vykonává všechny logické operace a příkazy aplikace, které jsou vyvolány přes view a upravují data přes model.
 \end{enumerate}
 
 Výhodou webové aplikace je to, že architekturu MVC respektuje a jednotlivé komponenty jsou striktně oddělené. Kdyby uživatel z nějakého důvodu potřeboval, aby části aplikace běžely na různých strojích, není to problém. Jediná část, která musí na skladu běžet, je daemon. Ostatní části aplikace pak mohou běžet vzdáleně a komunikace může probíhat po síti.
 
 \section{Daemon}
 
+První komponentou celé aplikace je daemon. Je to program, který se automaticky spustí po zapnutí skladu\footnote{Daemon se spouští přes soubor rc.local} a běží nepřetržitě na pozadí. Výhodou oddělení daemonu od webové aplikace je zejména modularita. Pokud se změní elektronika nebo fyzická stavba skladu, stačí upravit daemon a webovou aplikaci není třeba měnit. Daemon je napsán v Pythonu, což je skriptovací jazyk, který umožňuje jednoduchý přístup jak k databázi, tak k sériové lince. Funkce daemonu jsou:
 
-\section{Popis databáze}  %zde bude popis datového modelu (nějaký UML) +mozna popis pouzite technologie
-\hoffset = 0mm
-Pro ukládání dat jsem použil databázový server MySQL.
+\begin{enumerate}
+\item \textbf{předávání příkazů z databáze do skladu} - Hlavní funkcí daemonu je čtení příkazů z databáze a následné poslání příkazu skladu. Sklad se po celou dobu dívá do databáze, zda není potřeba něco vykonat, a pokud ano, zpracuje příkaz a po sériové lince pošle skladu sekvenci paketů.
+\item \textbf{hlášení chyb ze skladu do databáze} - V případě, že při vydávání součástky nastane problém. Sklad pošle po sériové lince zpět do daemonu sérii paketů o chybě a daemon chybu zapíše do databáze. Webová aplikace poté chybu zobrazí uživateli.
+\item \textbf{automatické oznámení emailem} - Nastanou-li události vyžadující pozornost správců skladu, pošle jim daemon upozorňující email. Tyto události zahrnují nedostatek součástek nebo chyba při vydávání.
+\item \textbf{ovládání LED indikátorů} - Ve skladu jsou zabudované LED diody signalizující stav skladu (napájení, síť, chyby). Tyto LED diody jsou napojené na Raspberry Pi a jsou ovládané daemonem.
+\end{enumerate}
 
 
+Daemon jsem psal jako objektově orientovanou aplikaci. To znamená, že je rozdělen do několika logických celků (tříd), které obstarávají jednotlivé funkce a v případě potřeby nových funkcí není potřeba přepisovat celou aplikaci, ale jen třídy, kterých se změna týká. Daemon obsahuje následující třídy:
+
+\begin{itemize}
+\item \textbf{Daemon} - hlavní třída komponenty. Třída Daemon sdružuje všechny ostatní třídy a definuje funkci loop(), která se neustále znovu spouští, a ve které probíhají všechny funkce daemonu.
+\item \textbf{Database} - třída pro přístup k databáze. Ostatní třídy daemonu pomocí ní získávají nové příkazy a další informace.
+\item \textbf{Device} - třída pro přístup ke skladu. Jako jediná komunikuje přímo se skladem (má přístup k sériové lince) a je v ní definován komunikační protokol. Pomocí funkcí run(), move(), pull() a cut() je možné sklad ovládat.
+\item \textbf{PowerIndication} - třída pro ovládání LED diod.
+\end{itemize}
+
+\subsection {Komunikace se skladem}
+
+Daemon komunikuje se skladem přes sériovou linku. Ta neposkytuje žádný abstraktní způsob komunikace, ale jen proud bytů. Daemon čte ze vstupního streamu\footnote{stream - speciální typ souboru, který imituje datový proud} data ze skladu a zapisuje do výstupního streamu příkazy.
+
+\subsubsection{Paket}
+
+Vzhedem k povaze komunikace (povely) není možné, aby se data posílala jen jako proud bytů bez další abstrakce. Proto jsme s kolegou, který se zabývá elektronikou, museli navrhnout komunikační protokol, který bude tvořen pakety.
+
+%schema paketu
+\vspace{3mm}
 \begin{center}
-\hspace*{-2cm}
-\includegraphics[scale=0.91]{img/entity_diagram.png}
+\begin{tabular}{| l | l |}
+\hline
+1. byte & start byte \\ \hline
+2. byte & číslo paketu \\ \hline
+3. byte & číslo příkazu \\ \hline
+4. byte & délka argumentů / 1. argument \\ \hline
+5. - ?. byte & další argumenty \\ \hline
+\end {tabular}
 \\
-\caption{Obr. 3: UML diagram struktury databáze skladu}
+\vspace{1mm}
+\caption{Tabulka 1: Popis paketu}
 \end{center}
-\vspace{2mm}
 
-\newpage
-\subsection{Seznam entit}
 
-Databázový model má celkem 5 entit.
+Každý paket je tvořen byty. Maximální délka každého paketu je 64 bytů.
+Přestože komunikace probíhá po sériové lince, která je krátká a neměly by nastávat žádné chyby, jsou v paketu zahrnuty bezpečností prvky, které by případné chyby měly eliminovat.
+Paket vždy začíná bytem 0x80 (start byte), který by měl zajišťovat to, že v případě neočekávaného vložení nebo odstranění bytu z datového proudu žádná strana nebude číst stream 'posunutě' (tím by se zásadně změnil význam paketu). Hodnota 0x80 je zvolena kvůli svému zápisu v binární soustavě (01000000), který je speciální a je málo pravděpodobné, že by taková posloupnost bitů vznikla chybou (např. šumem).
+2. bytem je číslo paketu, které je zde také kvůli bezpečnosti. Pokud totiž jedna strana pošle paket, na který má druhá strana odpovědět dalším paketem, je potřeba, aby první strana věděla, jestli, a na jaký paket jí přichází odpověd. Jelikož se do 1 bytu vejde jen hodnota do 255, bude toto číslo přetékat. To by ale neměl být problém (pravděpodobnost, že by jeden paket 'předběhl' 255 dalších je zanedbatelná).
+3. bytem je číslo příkazu (viz tabulku číslo 2).
+Dalšími byty jsou argumetry příkazu. Pokud je z čísla příkazu možné jednoznačně určit počet argumentů, hned 4. bytem začínají argumenty. Pokud ne, ve 4. bytu je délka argumentů, které začínají až 5. bytem.
+
+\section{Databáze}  %zde bude popis datového modelu (nějaký UML) +mozna popis pouzite technologie
+
+Další komponentou aplikace je databáze. Ta zajišťuje ukládání veškerých dat a tím pádem i komunikaci mezi webovou aplikací a daemonem. Databáze běží na databázovém serveru MySQL a ostatní komponenty k databázi přistupují pomocí unix socketu\footnote{způsob komunikace mezi aplikacemi na jednom zařízení}, ale je zde i možnost vzdáleného připojení po síti, což umožňuje spustit jednotlivé komponenty na více strojích (viz kap. 3.5).
+
+Data se v databázi ukládají formou objektů, které jsou mezi sebou databázovými relacemi provázané. V databázi budou uloženy následující objekty:
+
 \begin{itemize}
-\item User
-\item Part
-\item Socket
-\item Queue
-\item History
-\end{itemize}
-
-\subsubsection{User}
-
-Entita User popisuje uživatele aplikace:
-\begin{itemize}
-\item id
-\item username - uživatelské jméno
-\item passwordHash - hash hesla uživatele
-\item role
-\item name - reálné jméno uživatele
-\item email
-\end{itemize}
-
-\subsubsection{Part}
-
-Entita Part popisuje součástku v databázi součástek:
-\begin{itemize}
-\item id
-\item name - název součástky
-\item width - šířka
-\item length - délka
-\item description - popis
-\end{itemize}
-
-\subsubsection{Socket}
-
-Entita Socket popisuje jednu přihrádku z aktuálního rozložení přihrádek ve skladu:
-\begin{itemize}
-\item id
-\item part - odkaz na součástku právě uloženou v přihrádce
-\item level - patro
-\item position - pozice
-\item amount - aktuální počet součástek
-\item available - kolik je aktuálně možné vybrat součástek
+\item \textbf{User} - objekt uživatele. Obsahuje informace o uživateli, jeho přístupové údaje a uživatelská práva
+\item \textbf{Part} - objekt součástky. Obsahuje základní informace o jednom typu součástky.
+\item \textbf{Attribute} - atribut součástky. Definuje nějakou fyzikální vlastnost (např. odpor), kterou může součástka mít.
+\item \textbf{PartAttribute} - konkrétní hodnota vlastnosti nějaké součástky
+\item \textbf{Type} - Definuje druh součástky (např. rezistor, dioda).
+\item \textbf{Socket} - objekt přihrádky. Obsahuje informace o konkrétní přihrádce ve skladu. Tzn. její polohu, odkaz na součástku v ní a množství součástek.
+\item \textbf{QueueEntry} - položka ve frontě. Popisuje jeden příkaz na výdej součástky. Do tabulky těchto objektů se dívá i daemon.
+\item \textbf{HistoryEntry} - záznam o výběru. Obsahuje informace o již proběhlém příkazu. Po úspěšném zpracování položky ve frontě se vytvoří záznam o výběru a uloží se do databáze.
 \end{itemize}
 
 
-\subsubsection{QueueEntry}
-
-Entita QueueEntry popisuje jeden záznam ve frontě:
-\begin{itemize}
-\item id
-\item user - odkaz na uživatele, který výběr zadal
-\item part - odkaz na součástku, která byla objednána
-\item socket - odkaz na přihrádku, ze které se má vybírat
-\item state - stav požadavku (nevyřešen, provádí se, chyba)
-\item created - čas vytvoření požadavku
-\item amount - počet součástek k vybrání
-\end{itemize}
-
-
-
-\subsubsection{HistoryEntry}
-
-Entita HistoryEntry popisuje jeden záznam (vybrání nebo doplnění) z historie:
-\begin{itemize}
-\item id
-\item state - stav požadavku (dokončeno, chyba)
-\item created - čas vytvoření požadavku
-\item user - uživatelské jméno uživatele
-\item part - název součástky
-\item level - patro. ze kterého se vybíralo
-\item position - pozice, ze které se vybíralo
-\item amount - vybraný počet
-\end{itemize}
-
-
-\section{Popis webového prostředí}  %popis webového prostředí (nějaký Use case UML), možná přiblížení technologie, popis jednotlivých částí
+\section{Webové rozhraní}  %popis webového prostředí (nějaký Use case UML), možná přiblížení technologie, popis jednotlivých částí
 
 \subsection{Funkce}
 

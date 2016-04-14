@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2016.4.11)  14 APR 2016 00:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2016.4.11)  14 APR 2016 14:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -572,19 +572,6 @@ color push 0 g 0 G
 color pop
 color push 0 g 0 G
 color pop
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
-] [2
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
 ]
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 188.
 
@@ -600,7 +587,7 @@ Overfull \hbox (13.33699pt too wide) in paragraph at lines 190--191
 e dopl^^Tnov^^San^^S^^P a dal^^Ts^^S^^P na-ku-pov^^San^^S^^P sou^^Tc^^Sastek. 
  []
 
-[3
+[2
 color push 0 g 0 G
 color pop
 color push 0 g 0 G
@@ -613,12 +600,12 @@ color push 0 g 0 G
 color pop
 color push 0 g 0 G
 color pop
-] [4
+] [3
 color push 0 g 0 G
 color pop
 color push 0 g 0 G
 color pop
-] <img/sklad.JPG, id=41, 3886.52pt x 2601.72pt>
+] <img/sklad.JPG, id=38, 3886.52pt x 2601.72pt>
 File: img/sklad.JPG Graphic file (type jpg)
  <use img/sklad.JPG>
 Package pdftex.def Info: img/sklad.JPG used on input line 222.
@@ -644,14 +631,14 @@ If that doesn't work, type  X <return>  to quit.
 Overfull \vbox (410.23936pt too high) has occurred while \output is active []
 
 
-[5
+[4
 color push 0 g 0 G
 color pop
 color push 0 g 0 G
 color pop
 color push 0 g 0 G
 color pop
- <./img/sklad.JPG>] [6
+ <./img/sklad.JPG>] [5
 color push 0 g 0 G
 color pop
 color push 0 g 0 G
@@ -674,7 +661,7 @@ Overfull \hbox (1.1803pt too wide) in paragraph at lines 255--256
 ^^Tznost^^S^^P bylo vyu^^Tz^^S^^Pt jako fron-tend/footnote[]C^^Sast
  []
 
-[7
+[6
 color push 0 g 0 G
 color pop
 color push 0 g 0 G
@@ -697,24 +684,35 @@ color push 0 g 0 G
 color pop
 color push 0 g 0 G
 color pop
-] <img/entity_diagram.png, id=52, 287.6346pt x 307.1475pt>
-File: img/entity_diagram.png Graphic file (type png)
-
-<use img/entity_diagram.png>
-Package pdftex.def Info: img/entity_diagram.png used on input line 311.
-(pdftex.def)             Requested size: 261.74788pt x 279.50465pt.
-
-
-! LaTeX Error: \caption outside float.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.313 \caption
-              {Obr. 3: UML diagram struktury databáze skladu}
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
+] [7
+color push 0 g 0 G
+color pop
+color push 0 g 0 G
+color pop
+color push 0 g 0 G
+color pop
+color push 0 g 0 G
+color pop
+color push 0 g 0 G
+color pop
+color push 0 g 0 G
+color pop
+color push 0 g 0 G
+color pop
+color push 0 g 0 G
+color pop
+color push 0 g 0 G
+color pop
+color push 0 g 0 G
+color pop
+color push 0 g 0 G
+color pop
+]
+Overfull \hbox (0.34047pt too wide) in paragraph at lines 317--318
+[]\OT1/cmr/bx/n/12 Database \OT1/cmr/m/n/12 - t^^Tr^^S^^Pda pro p^^Tr^^S^^Pstup
+ k da-tab^^Saze. Ostatn^^S^^P t^^Tr^^S^^Pdy da-e-monu po-moc^^S^^P n^^S^^P z^^S
+^^Psk^^Savaj^^S^^P
+ []
 
 [8
 color push 0 g 0 G
@@ -739,65 +737,40 @@ color push 0 g 0 G
 color pop
 color push 0 g 0 G
 color pop
-] [9
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
- <./img/entity_diagram.png>] [10
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
 ]
-<img/use_case_uml.png, id=64, 802.197pt x 292.4526pt>
+
+! LaTeX Error: \caption outside float.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.343 \caption
+              {Tabulka 1: Popis paketu}
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[9
+color push 0 g 0 G
+color pop
+color push 0 g 0 G
+color pop
+color push 0 g 0 G
+color pop
+color push 0 g 0 G
+color pop
+color push 0 g 0 G
+color pop
+color push 0 g 0 G
+color pop
+] <img/use_case_uml.png, id=58, 802.197pt x 292.4526pt>
 File: img/use_case_uml.png Graphic file (type png)
 
 <use img/use_case_uml.png>
-Package pdftex.def Info: img/use_case_uml.png used on input line 402.
+Package pdftex.def Info: img/use_case_uml.png used on input line 379.
 (pdftex.def)             Requested size: 553.51653pt x 201.79251pt.
 
-Overfull \hbox (46.25421pt too wide) in paragraph at lines 401--403
+Overfull \hbox (46.25421pt too wide) in paragraph at lines 378--380
  |  [] 
  []
 
@@ -808,12 +781,12 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.404 \caption
+l.381 \caption
               {Obr. 4: Use case diagram aplikace}
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-[11
+[10
 color push 0 g 0 G
 color pop
 color push 0 g 0 G
@@ -832,41 +805,17 @@ color push 0 g 0 G
 color pop
 color push 0 g 0 G
 color pop
+ <./img/use_case_uml.png>] [11
 color push 0 g 0 G
 color pop
 color push 0 g 0 G
 color pop
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
-] [12
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
- <./img/use_case_uml.png>]
-<img/code_presenter.png, id=72, 804.75656pt x 451.6875pt>
+]
+<img/code_presenter.png, id=67, 804.75656pt x 451.6875pt>
 File: img/code_presenter.png Graphic file (type png)
 
 <use img/code_presenter.png>
-Package pdftex.def Info: img/code_presenter.png used on input line 451.
+Package pdftex.def Info: img/code_presenter.png used on input line 428.
 (pdftex.def)             Requested size: 362.1371pt x 203.25749pt.
 
 
@@ -876,21 +825,21 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.453 \caption
+l.430 \caption
               {Obr. 5: Ukázka kódu presenteru}
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Overfull \hbox (17.62482pt too wide) in paragraph at lines 449--457
+Overfull \hbox (17.62482pt too wide) in paragraph at lines 426--434
 []$[]$
  []
 
-<img/code_template.png, id=73, 798.73407pt x 384.6872pt>
+<img/code_template.png, id=68, 798.73407pt x 384.6872pt>
 File: img/code_template.png Graphic file (type png)
 
 <use img/code_template.png>
-Package pdftex.def Info: img/code_template.png used on input line 460.
+Package pdftex.def Info: img/code_template.png used on input line 437.
 (pdftex.def)             Requested size: 359.42702pt x 173.10764pt.
 
 
@@ -900,28 +849,20 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.462 \caption
+l.439 \caption
               {Obr. 6: Ukázka kódu šablony}
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Overfull \hbox (17.62482pt too wide) in paragraph at lines 458--466
+Overfull \hbox (17.62482pt too wide) in paragraph at lines 435--443
 []$[]$
  []
 
-[13
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
- <./img/code_presenter.png>]
-<img/web.png, id=78, 1443.89438pt x 574.39594pt>
+<img/web.png, id=69, 1443.89438pt x 574.39594pt>
 File: img/web.png Graphic file (type png)
  <use img/web.png>
-Package pdftex.def Info: img/web.png used on input line 480.
+Package pdftex.def Info: img/web.png used on input line 457.
 (pdftex.def)             Requested size: 447.60263pt x 178.06088pt.
 
 
@@ -931,8 +872,107 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.482 \caption
+l.459 \caption
               {Obr. 7: Screenshot webového rozhraní}
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[12
+color push 0 g 0 G
+color pop
+color push 0 g 0 G
+color pop
+color push 0 g 0 G
+color pop
+color push 0 g 0 G
+color pop
+ <./img/code_presenter.png> <./img/code_template.png>]
+<img/web_navbar.png, id=73, 852.93657pt x 41.4047pt>
+File: img/web_navbar.png Graphic file (type png)
+ <use img/web_navbar.png>
+Package pdftex.def Info: img/web_navbar.png used on input line 476.
+(pdftex.def)             Requested size: 426.46724pt x 20.70229pt.
+
+
+! LaTeX Error: \caption outside float.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.478 \caption
+              {Obr. 8: Navigační lišta}
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Overfull \hbox (2.61108pt too wide) in paragraph at lines 473--482
+[] $[]$
+ []
+
+<img/web_prihlaseni.png, id=74, 854.44218pt x 447.92343pt>
+File: img/web_prihlaseni.png Graphic file (type png)
+
+<use img/web_prihlaseni.png>
+Package pdftex.def Info: img/web_prihlaseni.png used on input line 493.
+(pdftex.def)             Requested size: 427.22005pt x 223.96117pt.
+
+
+! LaTeX Error: \caption outside float.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.495 \caption
+              {Obr. 9: Navigační lišta}
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Overfull \hbox (2.61108pt too wide) in paragraph at lines 490--499
+[] $[]$
+ []
+
+[13
+color push 0 g 0 G
+color pop
+color push 0 g 0 G
+color pop
+color push 0 g 0 G
+color pop
+color push 0 g 0 G
+color pop
+ <./img/web.png> <./img/web_navbar.png>]
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.507 \begin
+            {minipage}{\textwidth}
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+<img/web_vybrat_soucastky.png, id=79, 850.67813pt x 446.41782pt>
+File: img/web_vybrat_soucastky.png Graphic file (type png)
+
+<use img/web_vybrat_soucastky.png>
+Package pdftex.def Info: img/web_vybrat_soucastky.png used on input line 509.
+(pdftex.def)             Requested size: 425.33803pt x 223.20836pt.
+
+
+! LaTeX Error: \caption outside float.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.511 \caption
+              {Obr. 10: Vybírání součástek}
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
@@ -945,54 +985,7 @@ color push 0 g 0 G
 color pop
 color push 0 g 0 G
 color pop
- <./img/code_template.png> <./img/web.png>]
-<img/web_navbar.png, id=82, 852.93657pt x 41.4047pt>
-File: img/web_navbar.png Graphic file (type png)
- <use img/web_navbar.png>
-Package pdftex.def Info: img/web_navbar.png used on input line 499.
-(pdftex.def)             Requested size: 426.46724pt x 20.70229pt.
-
-
-! LaTeX Error: \caption outside float.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.501 \caption
-              {Obr. 8: Navigační lišta}
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Overfull \hbox (2.61108pt too wide) in paragraph at lines 496--505
-[] $[]$
- []
-
-<img/web_prihlaseni.png, id=83, 854.44218pt x 447.92343pt>
-File: img/web_prihlaseni.png Graphic file (type png)
-
-<use img/web_prihlaseni.png>
-Package pdftex.def Info: img/web_prihlaseni.png used on input line 516.
-(pdftex.def)             Requested size: 427.22005pt x 223.96117pt.
-
-
-! LaTeX Error: \caption outside float.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.518 \caption
-              {Obr. 9: Navigační lišta}
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Overfull \hbox (2.61108pt too wide) in paragraph at lines 513--522
-[] $[]$
- []
-
+ <./img/web_prihlaseni.png> <./img/web_vybrat_soucastky.png>]
 
 ! LaTeX Error: There's no line here to end.
 
@@ -1000,17 +993,17 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.530 \begin
+l.523 \begin
             {minipage}{\textwidth}
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-<img/web_vybrat_soucastky.png, id=84, 850.67813pt x 446.41782pt>
-File: img/web_vybrat_soucastky.png Graphic file (type png)
+<img/web_doplnit_soucastky.png, id=83, 850.67813pt x 446.41782pt>
+File: img/web_doplnit_soucastky.png Graphic file (type png)
 
-<use img/web_vybrat_soucastky.png>
-Package pdftex.def Info: img/web_vybrat_soucastky.png used on input line 532.
+<use img/web_doplnit_soucastky.png>
+Package pdftex.def Info: img/web_doplnit_soucastky.png used on input line 525.
 (pdftex.def)             Requested size: 425.33803pt x 223.20836pt.
 
 
@@ -1020,8 +1013,46 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.534 \caption
-              {Obr. 10: Vybírání součástek}
+l.527 \caption
+              {Obr. 11: Doplňování součástek}
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Overfull \hbox (2.27045pt too wide) in paragraph at lines 532--534
+[]\OT1/cmr/m/n/12 Dopl^^Tnov^^San^^S^^P sou^^Tc^^Sastek ne-bude tak moc pou^^Tz
+^^S^^Pvan^^Sa funkce. Proto jsem se roz-hodl za^^Tclenit
+ []
+
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.538 \begin
+            {minipage}{\textwidth}
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+<img/web_seznam_prihradek.png, id=84, 850.67813pt x 446.41782pt>
+File: img/web_seznam_prihradek.png Graphic file (type png)
+
+<use img/web_seznam_prihradek.png>
+Package pdftex.def Info: img/web_seznam_prihradek.png used on input line 540.
+(pdftex.def)             Requested size: 425.33803pt x 223.20836pt.
+
+
+! LaTeX Error: \caption outside float.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.542 \caption
+              {Obr. 12: Seznam přihrádek}
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
@@ -1034,92 +1065,12 @@ color push 0 g 0 G
 color pop
 color push 0 g 0 G
 color pop
- <./img/web_navbar.png> <./img/web_prihlaseni.png>]
-
-! LaTeX Error: There's no line here to end.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.546 \begin
-            {minipage}{\textwidth}
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-<img/web_doplnit_soucastky.png, id=88, 850.67813pt x 446.41782pt>
-File: img/web_doplnit_soucastky.png Graphic file (type png)
-
-<use img/web_doplnit_soucastky.png>
-Package pdftex.def Info: img/web_doplnit_soucastky.png used on input line 548.
-(pdftex.def)             Requested size: 425.33803pt x 223.20836pt.
-
-
-! LaTeX Error: \caption outside float.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.550 \caption
-              {Obr. 11: Doplňování součástek}
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Overfull \hbox (2.27045pt too wide) in paragraph at lines 555--557
-[]\OT1/cmr/m/n/12 Dopl^^Tnov^^San^^S^^P sou^^Tc^^Sastek ne-bude tak moc pou^^Tz
-^^S^^Pvan^^Sa funkce. Proto jsem se roz-hodl za^^Tclenit
- []
-
-[16
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
- <./img/web_vybrat_soucastky.png> <./img/web_doplnit_soucastky.png>]
-
-! LaTeX Error: There's no line here to end.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.561 \begin
-            {minipage}{\textwidth}
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-<img/web_seznam_prihradek.png, id=92, 850.67813pt x 446.41782pt>
-File: img/web_seznam_prihradek.png Graphic file (type png)
-
-<use img/web_seznam_prihradek.png>
-Package pdftex.def Info: img/web_seznam_prihradek.png used on input line 563.
-(pdftex.def)             Requested size: 425.33803pt x 223.20836pt.
-
-
-! LaTeX Error: \caption outside float.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.565 \caption
-              {Obr. 12: Seznam přihrádek}
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-<img/web_seznam_soucastek.png, id=93, 850.67813pt x 446.41782pt>
+ <./img/web_doplnit_soucastky.png> <./img/web_seznam_prihradek.png>]
+<img/web_seznam_soucastek.png, id=88, 850.67813pt x 446.41782pt>
 File: img/web_seznam_soucastek.png Graphic file (type png)
 
 <use img/web_seznam_soucastek.png>
-Package pdftex.def Info: img/web_seznam_soucastek.png used on input line 578.
+Package pdftex.def Info: img/web_seznam_soucastek.png used on input line 555.
 (pdftex.def)             Requested size: 425.33803pt x 223.20836pt.
 
 
@@ -1129,25 +1080,18 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.580 \caption
+l.557 \caption
               {Obr. 13: Seznam součástek}
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-[17
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
-color push 0 g 0 G
-color pop
- <./img/web_seznam_prihradek.png>]
-Overfull \hbox (4.29402pt too wide) in paragraph at lines 585--588
+
+Overfull \hbox (4.29402pt too wide) in paragraph at lines 562--565
 \OT1/cmr/m/n/12 sou^^Tc^^Sastky z n^^S^^P p^^Tri^^Trazovat do p^^Trihr^^Sadek. 
 Na na-viga^^Tcn^^S^^P li^^Tst^^Te bude od-kaz na ta-bulku sou^^Tc^^Sastek,
  []
 
-[18
+[16
 color push 0 g 0 G
 color pop
 color push 0 g 0 G
@@ -1158,7 +1102,7 @@ color pop
 ! Missing number, treated as zero.
 <to be read again> 
                    }
-l.599 \begin{figure}{\textwidth}
+l.576 \begin{figure}{\textwidth}
                                 
 A number should have been here; I inserted `0'.
 (If you can't figure out why I needed to see a number,
@@ -1167,7 +1111,7 @@ look up `weird error' in the index to The TeXbook.)
 ! Illegal unit of measure (pt inserted).
 <to be read again> 
                    }
-l.599 \begin{figure}{\textwidth}
+l.576 \begin{figure}{\textwidth}
                                 
 Dimensions can be in units of em, ex, in, pt, pc,
 cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
@@ -1176,13 +1120,13 @@ To recover gracefully from this error, it's best to
 delete the erroneous units; e.g., type `2' to delete
 two letters. (See Chapter 27 of The TeXbook.)
 
-<img/web_fronta.png, id=100, 852.93657pt x 448.67625pt>
+<img/web_fronta.png, id=92, 852.93657pt x 448.67625pt>
 File: img/web_fronta.png Graphic file (type png)
 
 <use img/web_fronta.png>
-Package pdftex.def Info: img/web_fronta.png used on input line 601.
+Package pdftex.def Info: img/web_fronta.png used on input line 578.
 (pdftex.def)             Requested size: 426.46724pt x 224.33757pt.
- [19
+ [17
 color push 0 g 0 G
 color pop
 color push 0 g 0 G
@@ -1209,12 +1153,12 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.655 \caption
+l.632 \caption
               {Tabulka 1: Popis paketu}
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-[20
+[18
 color push 0 g 0 G
 color pop
 color push 0 g 0 G
@@ -1229,30 +1173,30 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.683 \caption
+l.660 \caption
               {Tabulka 2: Přehled příkazů}
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-[21
+[19
 color push 0 g 0 G
 color pop
 color push 0 g 0 G
 color pop
 color push 0 g 0 G
 color pop
-] [22
+] [20
 color push 0 g 0 G
 color pop
 color push 0 g 0 G
 color pop
 ]
-Overfull \hbox (12.58421pt too wide) in paragraph at lines 712--713
+Overfull \hbox (12.58421pt too wide) in paragraph at lines 689--690
 []\OT1/cmr/m/n/12 Ofici^^Saln^^S^^P webov^^Se str^^Sanky mo-de-lo-vac^^S^^Pho p
 ro-gramu Mo-de-lio - https://www.modelio.org/ 
  []
 
-[23
+[21
 color push 0 g 0 G
 color pop
 color push 0 g 0 G
@@ -1273,10 +1217,10 @@ color push 0 g 0 G
 color pop
 ] (./textKraj.aux) ) 
 Here is how much of TeX's memory you used:
- 3091 strings out of 494986
- 40934 string characters out of 6180027
+ 3086 strings out of 494986
+ 40809 string characters out of 6180027
  110867 words of memory out of 5000000
- 6235 multiletter control sequences out of 15000+600000
+ 6231 multiletter control sequences out of 15000+600000
  10234 words of font info for 37 fonts, out of 8000000 for 9000
  24 hyphenation exceptions out of 8191
  38i,9n,23p,982b,266s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1286,10 +1230,10 @@ cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/sh
 are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texl
 ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on textKraj.pdf (29 pages, 4949544 bytes).
+Output written on textKraj.pdf (27 pages, 4908812 bytes).
 PDF statistics:
- 138 PDF objects out of 1000 (max. 8388607)
- 84 compressed objects within 1 object stream
+ 130 PDF objects out of 1000 (max. 8388607)
+ 80 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 71 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 66 words of extra memory for PDF output out of 10000 (max. 10000000)
 
