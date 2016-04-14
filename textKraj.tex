@@ -453,15 +453,15 @@ V případě, že nějaká součástka dochází, stačí, aby správce skladu v
 
 Aby mohli uživatelé vyhledávat mezi součástkami na skladu, je potřeba, aby byly o každé součástce na skladu informace v databázi součástek. Přidávání součástky do skladu tedy může být velmi pracné, ale opak je pravdou. Díky integraci API obchodů s elektronikou stačí vyfotit čárový kód na kotouči se součástkami a web se o zbytek postará. V případě, že již součástka v databázi existuje, přiřadí ji do přihrádky. V případě, že součástka ještě v databázi není, automaticky ji i se všemi vlastnostmi přidá. Díky standardu HTML 5 mohou nově webové aplikace používat fotoaparát v mobilu. Správce skladu tedy jen vyfotí čárový kód, zadá číslo přihrádky, do které chce součástku přidat, a je hotovo.
 
-\subsection{Integrace API obchodů s elektonickými součástkami}
+\subsubsection{Integrace API obchodů s elektonickými součástkami}
 
 Kromě obrovského zjednodušení přidávání součástek má integrace API obchodů s elektronickými součástkami také další výhodu: zjednodušení nákupu součástek. V případě, že chce správce dokoupit docházející součástky, nemusí ručně procházet všechny obchody a hledat nejlepší cenu. Web správce rovnou přesměruje do obchodu s nejlepší cenou. V extrémním případě by správci došel email s objednávkou docházejících součástek v nejlepším obchodě.
 
-\subsection{Statistika}
+\subsubsection{Statistika}
 
 Web umí vykreslovat mnoho různých grafů a generovat výtahy z dat o výběrech součástek. Správce skladu může tyto statistiky využít například při plánování nákupu součástek a předpovědět, kdy bude potřeba součástky dokoupit. Pokud bude například kupovat více součástek najendou v jedné objednávce, může výrazně ušetřit za dopravu.
 
-\subsection{Optimalizace výkonu}
+\subsubsection{Optimalizace výkonu}
 
 Při testování aplikace na Raspberry Pi se bohužel objevily problémy s rychlostí aplikace. Načítání stránky trvalo i 5 sekund a celkově byla aplikace pomalá. Zjistil jsem, že problém není v rychosti procesoru nebo nedostatku operační paměti, ale v rychlosti SD karty. Nette Framework využívá pro vylepšení výkonu cachování\footnote{cachování - ukládání výpočtů na disk a pozdější opětovné využití za účelem snížení nároků na výpočetní výkon}, takže si ukládá velké množství souborů krátkodobě na SD kartu. Na běžném serveru se standardním hard diskem by to nebyl problém, ale na Raspberry Pi s pomalou SD kartou to výrazně zpomaluje celou aplikaci. Proto jsem na Raspberry Pi nainstaloval PHP OPCache, která způsobuje, že se ke cachování místo SD karty využívá operační pamět, která je mnohonásobně rychlejší. Problém se tímto vyřešil a aplikace teď běží dostatečně rychle.
 
