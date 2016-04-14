@@ -200,7 +200,7 @@ SMD součástky jsou speciálním typem součástek. Jsou určené k použití j
 
 \subsection{Současná situace}
 
-Dnes bohužel žádné řešení na tento problém neexistuje. Velké vývojové firmy mají vlastní sklady, které ale nejsou plně automatizované. Asi nejpodobnější zařízení skladu SMD součástek je osazovací zařízení, které automaticky osazuje desky plošných spojů SMD součástkami. To má ale často kapacitu jen na pár desítek kusů součástek a jeho cena se pohybuje řádově ve statisících.
+Dnes bohužel žádné řešení na tento problém neexistuje. Velké vývojové firmy mají vlastní sklady, které ale nejsou plně automatizované. Asi nejpodobnější zařízení skladu SMD součástek je osazovací zařízení, které automaticky osazuje desky plošných spojů SMD součástkami. To má ale často kapacitu jen na pár desítek kusů součástek a jeho cena se pohybuje řádově ve statisících korun.
 
 \subsection{Řešení}
 
@@ -350,6 +350,25 @@ Paket vždy začíná bytem 0x80 (start byte), který by měl zajišťovat to, �
 2. bytem je číslo paketu, které je zde také kvůli bezpečnosti. Pokud totiž jedna strana pošle paket, na který má druhá strana odpovědět dalším paketem, je potřeba, aby první strana věděla, jestli, a na jaký paket jí přichází odpověd. Jelikož se do 1 bytu vejde jen hodnota do 255, bude toto číslo přetékat. To by ale neměl být problém (pravděpodobnost, že by jeden paket 'předběhl' 255 dalších je zanedbatelná).
 3. bytem je číslo příkazu (viz tabulku číslo 2).
 Dalšími byty jsou argumetry příkazu. Pokud je z čísla příkazu možné jednoznačně určit počet argumentů, hned 4. bytem začínají argumenty. Pokud ne, ve 4. bytu je délka argumentů, které začínají až 5. bytem.
+Dalším bezpečnostím prvkem jsou také příkazy ACK a NACK, které jsou poslány jako odpověd na každý příkaz.
+
+\begin{center}
+\begin{tabular}{| l | l | p{10 cm} |}
+\hline
+Číslo příkazu & Název & Popis \\ \hline
+0x00 & NACK & not acknowledged - odpověď na příkaz, který nebyl úspěšně proveden; následuje kód chyby \\ \hline
+0x01 & ACK & acknowledged - odpověd na úspešně vykonaný příkaz, podle toho, na jaký příkaz odpovídá, může mít další argumenty \\ \hline
+0x02 & move & posun na dané místo, následují 2 byty s pozicí (Uint16) \\ \hline
+0x03 & pull & vytáhnutí kusu pásku z přihrádky, následují 2 byty s počtem dírek, které se mají vytáhnout (Uint16) \\ \hline
+0x04 & cut & ustřihnutí vytáhnutého kusu pásky, nemá argumenty \\ \hline
+0x05 & init & inicializaci - zařízení po startu dojede s hlavou na oba konce, aby zkalibrovalo motory a zjistilo přesnou polohu, nemá argumenty \\ \hline
+0x06 & power & napájení krokových motorů - příkaz je potřeba provést ještě před inicializací, nemá argumenty \\ \hline
+\end{tabular}
+\\
+\vspace{1mm}
+\caption{Tabulka 2: Přehled příkazů}
+\end{center}
+
 
 \section{Databáze}  %zde bude popis datového modelu (nějaký UML) +mozna popis pouzite technologie
 
@@ -371,6 +390,38 @@ Data se v databázi ukládají formou objektů, které jsou mezi sebou databázo
 
 \section{Webové rozhraní}  %popis webového prostředí (nějaký Use case UML), možná přiblížení technologie, popis jednotlivých částí
 
+Třetí a největší komponenta celé aplikace je webové rozhraní. Jak již jsem dříve zmínil, je webové rohraní napsáno v PHP s využitím Nette Frameworku a běží na Apache Web Server. Jelikož má celá aplikace za účel hlavně usnadnit uživateli používání skladu, zaměřil jsem se na tuto komponentu ze všech nejvíce, jelikož je zároveň uživatelským rohraním celé aplikace.
+
+\subsection{Nette Framework}
+
+Nette je český framework pro psaní webových aplikací v PHP. Jeho hlavní prioritou je jednoduchost, což narozdíl od konkurenčních frameworků, které se zaměřují spíše na co nejvíce funkcí, splňuje. Zároveň však nepostrádá žádnou funkci, kterou bych při vývoji webového rozhraní potřeboval. Prvním krokem k vytvoření funkční webové aplikace je založení projektu pomocí Composeru, který zároveň vyřeší závislosti na dalším softwaru. Vytvoří se adresářová struktura a poté již stačí psát aplikaci pomocí nově definovaných tříd. Každá aplikace v Nette by měla dodržovat rozdělení komponent na Model-View-Controller/footnote{MVC - architektura při vytváření aplikací s uživatelským rozhraním. Viz kap. 3.5}. Aplikace se primárně dělí na presentery, které načítají data z databáze pomocí modelu a připraví je tak, aby je na ně napojené šablony mohly jednoduše zobrazit. Uživatel tedy vidí šablonu, která je naplněna daty z presenteru.
+
+\subsection{Autentifikace a autorizace}
+
+Kvůli bezpečnosti jsem přístup do aplikace omezil uživatelskými účty. Člověk bez uživatelského účtu se do aplikace vůbec nedostane. Dále jsou definovány 3 úrovně uživatelských práv, aby se rozlišilo mezi lidmi, kteří sklad užívají a těmi, kteří se o něj starají a potřebují mít zpřístupněno více funkcí. Kromě lepší bezpečnosti (obyčejný uživatel bude moci napáchat mnohem méně škod) to také zpřehlední uživatelské rozhraní, protože uživatel nebude zbytečně zatěžován mnoha tlačítky, která nevyužije.
+
+Webová aplikace tedy bude ozlišovat mezi těmito uživatelskými rolemi:
+
+\begin{enumerate}
+\item \textbf{uživatel} - základní uživatelský účet. Má možnost vybírat součástky a prohlížet statistiku a databázi součástek.
+\item \textbf{správce} - správcovský účet. Má možnost doplňovat součástky, manipulovat s rozložením součástek v přihrádek a měnit databázi součástek. Na email mu budou chodit vybraná upozornění.
+\item \textbf{administrátor} - nejmocnější účet. Může dělat všechno, co správce i uživatel, ale navíc bude moci přidávat, upravovat i mazat uživatelské účty.
+\end{enumerate}
+
+\subsection{Uživatelské rozhraní}
+
+Důležitou součástí vývoje aplikace byl návrh uživatelského rozhraní. Snažil jsem se uživatelské rozhraní udělat co nejjednodušší a nejpřehlednější (někdy i na úkor estetiky). Také jsem se snažil propojit části webové aplikace tak, aby uživatel nemusel zbytečně moc klikat. Při návrhu jsem použil CSS knihovnu Bootstrap, se kterou se dá relativně jednoduše vytvořit čistý a přehledný design webu. Hlavním navigačním prvkem webu je horní lišta, která obsahuje odkazy na všechy části webu. Zbytek prostoru je vyplněn vždy danou částí webu. K vytváření seznamů jsem použil rozšíření pro Nette Framework Mesour Datagrid, které umožňuje vytvářet chytré seznamy s tříděním a filtrováním. K reprezentování dat různými grafy jsem použil knihovnu D3.js.
+
+\subsubsection{AJAX}
+
+AJAX\footnote{Asynchronous Javascript and XML - název neodpovídá konceptu} je koncept, který říká, že po provedení nějaké uživatelské akce je někdy lepší nenačítat celou stránku znovu, ale jen ji aktualizovat. V praxi to znamená, že pokud uživatel například změní rozložení součástek ve skladu, není potřeba celou stránku načítat znovu, ale stačí jen vykreslit upravenou část znovu. Technicky je to řešeno tak, že na straně uživatele (v prohlížeči) běží Javascript, který posílá HTTP požadavky na server. Server podle požadavku může například něco změnit v databázi a pošle zpět HTML kód aktualizované části stránky. Na straně uživatele pak Javascript nový HTML kód vykreslí.
+
+Snažil jsem se ve webové aplikaci AJAX používat co nejvíce, protože si myslím, že neustále znovunačítání stránek je pomalé a hlavně nepříjemné.
+
+\subsubsection{Responzivní design}
+
+Největší výhoda knihovny Bootstrap je že za vývojáře velmi jednoduše vyřeší responzivní design. Není tedy potřeba psát aplikaci zvlášť pro zařízení s nízkým rozlišením (mobilní telefony), ale vzhled se automaticky přizpůsobí. Proto je celá webová aplikace přizpůsobena jak pro počítače a tablety, tak pro mobilní telefony a uživatelé se ke skladu dostanou opravdu odkudkoli.
+
 \subsection{Funkce}
 
 \begin{minipage}{\textwidth}
@@ -383,283 +434,37 @@ Data se v databázi ukládají formou objektů, které jsou mezi sebou databázo
 \end{minipage}
 \vspace{4mm}
 
+\subsubsection{Vybírání součástek}
 
-Přední funkcí webu bude navolení a součástek a zařazení jich do fronty na vybrání.
-Web bude mít ale kromě vydávání součástek ještě několik dalších praktických funkcí, které bude moci vykonávat nezávisle na zařízení.
+Vybírání součástek je hlavní funkce celé aplikace. Proto jsem se snažil, aby měl uživatel několik možností, jak si součástky navolit:
 
-\subsubsection{Změna stavů součástek v přihrádkách (Doplňování součástek)}
+\begin{enumerate}
+\item \textbf{podle typu} - Z jednoduché tabulky všech součástek si uživatel vybere, co potřebuje. Bude mít možnost tabulku filtrovat podle typu součástky (rezistor, kondenzátor, aj.).
+\item \textbf{podle vlastnosti} - Uživatel si nejdříve vybere, který druh součástky potřebuje. Podle vybraného druhu se mu zobrazí složitá tabulka se součástkami daného druhu a jejich vlastnostmi. Tuto možnost využijí hlavně lidé, kteří potřebují součástku o daných parametrech, ale nevědí, zda ve skladu nějaká vyhovující je
+\item \textbf{ze souboru} - Uživatel jednoduše nahraje partlist soubor (viz úvod) projektu, na kterém pracuje. Vůbec tedy není potřeba vybírat součástky z tabulek.
+\end{enumerate}
 
-Web bude umět zobrazit množství součástek v jednotlivých přihrádkách v přehledné tabulce. Tuto tabulku bude moci uživatel měnit (a s ní i hodnoty v databázi), když například doplňuje součástky.
+\subsubsection{Doplňování součástek}
 
-\subsubsection{Správa přihrádek}
+V případě, že nějaká součástka dochází, stačí, aby správce skladu vyměnil kotouč a na webu zadal nové množství součástek v přihrádce. Není třeba jakkoli manipulovat s rozložením součástek ve skladu.
 
-Uživatel bude moci jednoduše změnit typy součástek v jednotlivých přihrádkách a měnit jejich polohu.
 
 \subsubsection{Databáze součástek}
 
-Jakmile uživatel přidá nějakou součástku, uloží se do databáze její jméno, obrázek a popis. Kromě toho se uloží také šířka a délka, což jsou hodnoty potřebné pro zařízení.
-Výhledově budou v databázi uloženy i vlastnosti součástky a uživatel si bude moci vybrat součástku jednoduše podle vlastností.
+Aby mohli uživatelé vyhledávat mezi součástkami na skladu, je potřeba, aby byly o každé součástce na skladu informace v databázi součástek. Přidávání součástky do skladu tedy může být velmi pracné, ale opak je pravdou. Díky integraci API obchodů s elektronikou stačí vyfotit čárový kód na kotouči se součástkami a web se o zbytek postará. V případě, že již součástka v databázi existuje, přiřadí ji do přihrádky. V případě, že součástka ještě v databázi není, automaticky ji i se všemi vlastnostmi přidá. Díky standardu HTML 5 mohou nově webové aplikace používat fotoaparát v mobilu. Správce skladu tedy jen vyfotí čárový kód, zadá číslo přihrádky, do které chce součástku přidat, a je hotovo.
 
-\subsubsection{Databáze obchodů}
+\subsection{Integrace API obchodů s elektonickými součástkami}
 
-Pro všechny součástky v databázi bude možnost uložit i odkazy na webové stránky součástek v obchodech s elektronikou, takže uživatel si uživatel bude moci rychle vybrat, kde součástku nakoupí, bez zbytečného hledání.
-Do budoucna počítám i s implementací API některých obchodů do aplikace. Aplikace tak bude moci např. automaticky upozornit uživatele, že nějaká součástka dochází a odkáže ho na obchod s nejnižší cenou.
+Kromě obrovského zjednodušení přidávání součástek má integrace API obchodů s elektronickými součástkami také další výhodu: zjednodušení nákupu součástek. V případě, že chce správce dokoupit docházející součástky, nemusí ručně procházet všechny obchody a hledat nejlepší cenu. Web správce rovnou přesměruje do obchodu s nejlepší cenou. V extrémním případě by správci došel email s objednávkou docházejících součástek v nejlepším obchodě.
 
-\subsubsection{Správa uživatelů}
+\subsection{Statistika}
 
-Uživatelé budou mít různá přístupová práva a ti s vyššími přístupovými právy budou moci vytvořit nový uživatelský učet, nebo změnit nebo smazat již existující s nižšími právy.
+Web umí vykreslovat mnoho různých grafů a generovat výtahy z dat o výběrech součástek. Správce skladu může tyto statistiky využít například při plánování nákupu součástek a předpovědět, kdy bude potřeba součástky dokoupit. Pokud bude například kupovat více součástek najendou v jedné objednávce, může výrazně ušetřit za dopravu.
 
-\subsubsection{Fronta příkazů}
+\subsection{Optimalizace výkonu}
 
-Web bude umět zobrazit frontu všech příkazů v tabulce. Uživatel bude poté moci příkaz smazat, nebo jej posunout ve frontě. Pokud nastane chyba, uživatel se z tabulky dozví, jaký přikaz chybu způsobil a bude moci zkusit příkaz provést znovu,
-nebo jej přeskočit.
+Při testování aplikace na Raspberry Pi se bohužel objevily problémy s rychlostí aplikace. Načítání stránky trvalo i 5 sekund a celkově byla aplikace pomalá. Zjistil jsem, že problém není v rychosti procesoru nebo nedostatku operační paměti, ale v rychlosti SD karty. Nette Framework využívá pro vylepšení výkonu cachování\footnote{cachování - ukládání výpočtů na disk a pozdější opětovné využití za účelem snížení nároků na výpočetní výkon}, takže si ukládá velké množství souborů krátkodobě na SD kartu. Na běžném serveru se standardním hard diskem by to nebyl problém, ale na Raspberry Pi s pomalou SD kartou to výrazně zpomaluje celou aplikaci. Proto jsem na Raspberry Pi nainstaloval PHP OPCache, která způsobuje, že se ke cachování místo SD karty využívá operační pamět, která je mnohonásobně rychlejší. Problém se tímto vyřešil a aplikace teď běží dostatečně rychle.
 
-\subsubsection{Historie příkazů}
-
-Po provedení příkazu se řádek v databázi v tabulce fronty příkazů přesune do tabulky historie. Uživatel si na webu bude moci prohlédnout historii příkazů ve zvoleném časovém úseku.
-
-\subsection{Nette framework}
-
-Nette je PHP framework pro tvorbu dynamických webových aplikací. Poskytuje mnoho předprogramovaných funkcí např. pro přístup k databázi nebo k autentifikaci a autorizaci.
-Nette framework jsem použil především kvůli šablonovacímu systému a jednoduchému vytváření bezpečných formulářů. Vytváření webových aplikací v Nette je rozděleno podle architektury MVC. Nejprve je potřeba napsat presenter. To je třída, která zpracovává všechna data (např. z databáze) a připravuje je do šablony. Kromě toho také připravuje všechny formuláře a jiné webové komponenty. Následně se zavolá šablona dané stránky, do které se vloží všechny proměnné a komponenty připravené v presenteru. Odděleně se programují logické části aplikace (např. vlastní autentifikace), které s šablonou nesouvisí.
-
-\begin{minipage}{\textwidth}
-\begin{center}
-\includegraphics[scale=0.45]{img/code_presenter.png}
-\\
-\caption{Obr. 5: Ukázka kódu presenteru}
-\end{center}
-\end{minipage}
-\vspace{4mm}
-
-\begin{minipage}{\textwidth}
-\begin{center}
-\includegraphics[scale=0.45]{img/code_template.png}
-\\
-\caption{Obr. 6: Ukázka kódu šablony}
-\end{center}
-\end{minipage}
-\vspace{4mm}
-
-\subsection{Autentifikace a autorizace}
-
-
-Kvůli bezpečnosti jsem do aplikace implementoval autentifikaci (přihlašování) a autorizaci (přístup k jednotlivým funkcím webu na základě uživatelských práv). Autentifikaci budu řešit
-jednoduše pomocí jména a hesla. Autorizaci budu řešit pomocí rolí. Každý uživatel bude mít určité role, které mu dovolí přistupovat k určitým funkcím. Role jsem zatím rozdělil jednoduše.
-Každý uživatelský účet bude mít roli user, která ho bude opravňovat k základním funkcím (vybírání, doplňování součástek). Dále role manager (správce), který bude mít
-přístup skoro je všem funkcím, kromě správy uživatelských účtů, kde bude moci manipulovat pouze se základními účty s rolí user. Role administrator bude umět manipulovat
-i s účty s rolemi manager a administrator.
-
-\subsection{Uživatelské prostředí}
-
-\begin{minipage}{\textwidth}
-\begin{center}
-\includegraphics[scale=0.31]{img/web.png}
-\\
-\caption{Obr. 7: Screenshot webového rozhraní}
-\end{center}
-\end{minipage}
-\vspace{4mm}
-
-Aplikaci budou využívat různí uživatelé, takže je potřeba věnovat velkou pozornost uživatelskému prostředí. Mělo by být především jednoduché a intuitivní, ale také by se mělo dát rychle používat a mělo by umět přehledně prezentovat data.
-Snažil jsem se také o to, aby nejpoužívanější funkce byly dostupné na co nejméně kliků, zatímco méně používané funkce budou hůře dostupné. Myslím si totiž, že kdybych všechny funkce učinil
-lehce dostupné, znepřehlednilo by to prostředí.
-
-\subsubsection{Hlavní komponenty prostředí}
-
-\paragraph{Navigační lišta}
-
-
-\mbox{}
-\begin{minipage}{\textwidth}
-\begin{center}
-\includegraphics[scale=0.5]{img/web_navbar.png}
-\\
-\caption{Obr. 8: Navigační lišta}
-\end{center}
-\end{minipage}
-\vspace{4mm}
-
-Navigaci po webu na jednotlivé stránky funkcí jsem řešil přes navigační lištu na horním okraji stránky. Zde bude vedle sebe několik odkazů na jednotlivé funkce a několik rozbalovacích seznamů s odkazy na funkce, které jsou podobné (jinak by se vše na lištu nevešlo).
-Například několik stránek pro správu přihrádek je sdruženo do jednoho rozbalovacího seznamu. Na pravém okraji lišty je tlačítko pro odhlášení (odhlašovací tlačítko na pravém okraji navigační lišty považuji za dobrou konvenci, takže jsem ho tam také umístil).
-Navigační lišta také bude záviset na právech uživatele. Uživateli se budou ukazovat pouze odkazy na funkce, ke kterým má přístupová práva.
-
-
-\paragraph{Přihlašování}
-
-\mbox{}
-\begin{minipage}{\textwidth}
-\begin{center}
-\includegraphics[scale=0.5]{img/web_prihlaseni.png}
-\\
-\caption{Obr. 9: Navigační lišta}
-\end{center}
-\end{minipage}
-\vspace{4mm}
-
-Pro přihlašování jsem zvolil řešení prázdné stránky jen s přihlašovacím formulářem. Nebude totiž potřeba prezentovat web jednotlivých skladů nezaregistrovaným uživatelům a ti zaregistrovaní ocení, že nebudou muset přihlašovací formulář hledat.
-
-\subsubsection{Funkce prostředí}
-
-\paragraph{Vybírání součástek}
-
-\\
-\begin{minipage}{\textwidth}
-\begin{center}
-\includegraphics[scale=0.5]{img/web_vybrat_soucastky.png}
-\\
-\caption{Obr. 10: Vybírání součástek}
-\end{center}
-\end{minipage}
-\vspace{4mm}
-
-Jelikož je vybírání součástek nejdůležitější a nejpoužívanější funkcí aplikace, na liště na ni odkazuje hned první odkaz.
-Na stránce bude tabulka všech druhů součástek, které jsou momentálně ve skladu a bude u nich aktuální počet. Vedle každé součástky bude malé vyplňovací pole, které bude přijímat pouze čísla
-a tlačítko 'Vybrat'.
-
-\paragraph{Doplňování součástek}
-
-\\
-\begin{minipage}{\textwidth}
-\begin{center}
-\includegraphics[scale=0.5]{img/web_doplnit_soucastky.png}
-\\
-\caption{Obr. 11: Doplňování součástek}
-\end{center}
-\end{minipage}
-\vspace{4mm}
-
-Doplňování součástek nebude tak moc používaná funkce. Proto jsem se rozhodl začlenit ji do seznamu 'Správa přihrádek' na navigační liště. Uživateli se zobrazí všechny
-přihrádky se součástkami a bude moci změnit množství součástek v přihrádce (i zmenšit), kterou si vybere.
-
-\paragraph{Správa přihrádek}
-
-\\
-\begin{minipage}{\textwidth}
-\begin{center}
-\includegraphics[scale=0.5]{img/web_seznam_prihradek.png}
-\\
-\caption{Obr. 12: Seznam přihrádek}
-\end{center}
-\end{minipage}
-\vspace{4mm}
-
-Uživatel bude moci jednoduše spravovat všechny přihrádky. Na navigační liště bude odkaz tabulku přihrádek, kde bude moci přihrádku smazat, uvolnit (odstranit součástku z příhrádky)
-a prohlásit ji za chybovou (systém nedovolí s chybovou přihrádkou pracovat).
-Dále bude moci přes formulář vytvořit novou, nebo změnit její parametry (pokud se sklad fyzicky mění).
-
-\paragraph{Správa součástek}
-
-\begin{minipage}{\textwidth}
-\begin{center}
-\includegraphics[scale=0.5]{img/web_seznam_soucastek.png}
-\\
-\caption{Obr. 13: Seznam součástek}
-\end{center}
-\end{minipage}
-\vspace{4mm}
-
-Aplikace bude mít svoji databázi součástek, kterou budou uživatelé moci měnit a součástky z ní přiřazovat do přihrádek.
-Na navigační liště bude odkaz na tabulku součástek, kde uvidí všechny součástky pohromadě a zjistí jejich parametry, případně se může podívat na dokumentaci nebo obrázek.
-Z této tabulky je možné součástku upravit, smazat, nebo přiřadit do přihrádky. Novou součástku bude moci do databáze zadat pomocí formuláře.
-
-\paragraph{Správa obchodů}
-
-Na navigační liště bude ve skupině 'Spravovat součástky' také odkaz na tabulku obchodů, kde bude moci upravit nebo smazat obchod z databáze. Nový obchod bude moci zadat přes formulář.
-Součástku může uživatel k obchodu přiřadit přes odkaz v tabulce součástek. Objeví se mu formulář, kam zadá URL stránky součástky v obchodě. Tyto vztahy mezi součástkami a obchody si poté bude moci prohlédnout
-v detailu součástky.
-
-\paragraph{Fronta}
-
-\newpage
-
-\begin{figure}{\textwidth}
-\begin{center}
-\includegraphics[scale=0.5]{img/web_fronta.png}
-\\
-\caption{Obr. 14: Fronta}
-\end{center}
-\end{figure}
-
-
-Uživatel si bude moci prohlédnout také všechny příkazy ve frontě. Z tabulky může zjistit, jaké součástky jsou ve frontě, kdo příkaz zadal, nebo také jestli nenastala nějaká chyba.
-Správce bude moci mazat příkazy z fronty.
-
-\section{Popis daemonu} %možná použít radši něco jako hlavní program, zde bude blizsi nahled na pouzite technologie, mozna nejaky snippety a celkove popis jak to funguje a popis funkci (a rozepsat se o modularite)
-
-Jak jsem již zmínil, daemon bude naprogramovaný v jazyku Python. Jeho funkce by měly být:
-
-\begin{itemize}
-\item Inicializace skladu
-\item Posílání příkazů skladu
-\item Zpracování chyb skladu
-\item Posílání emailových upozornění
-\end{itemize}
-
-\subsection{Autostart}
-
-Daemon bude běžet po celou dobu. To znamená, že se spustí vždy automaticky po startu. Automatické spouštění po startu se v Linuxu dá vyřešit mnoha způsoby. Já jsem využil soubor /etc/rc.local, ve kterém jsou zapsány všechny příkazy, které se po spuštění systému spustí s rootovskými právy. Bez rootovských práv by aplikace nemohla běžet, jelikož využívá přístup k GPIO a sériové lince.
-
-\subsection{Struktura daemonu}
-
-Daemon jsem psal za použití objektově orientovaného programování (třídy), jelikož se daemon dá jednoduše rozdělit na několik částí a také to bude část aplikace, která se bude často upravovat a rozšiřovat (zatímco databáze a webové rozhraní jsou na skladu nezávislé, daemon je naprogramován na míru jednomu zařízení). Použitím objektově orientovaného programování bych chtěl zajistit znovupoužitelnost stávajícího kódu v modifikacích daemonu a přehlednost pro budoucí programátory.
-
-Hlavní třída Daemon bude mít metodu loop(), která bude běžet opakovaně a bude zastávat funkci hlavní smyčky programu. Dále třída Database bude poskytovat high-level přístup k databázi (např. třída bude poskytovat přímo jednotlivé příkazy z databáze a samostatně po provedení příkazů upraví data v databázi). Třída Notification bude kontrolovat, zda nemá poslat emailové upozornění, a tato upozornění posílat. Nejdůležitější bude třída StoreInterface, která bude obstarávat komunikaci se zařízením. Bude skladu posílat příkazy a zpracovávat odpovědi a případné chyby.
-
-\subsection{Posílání emailových upozornění}
-
-Pro posílání emailů jsem použil Python SMTP knihovnu smptlib. Upozornění by se měla posílat jednak v reakci na specifická data v databázi (málo součástek na skladu) a také v reakci na chyby skladu, které si žádají pozornost člověka (např. chyba při stříhání pásku).
-
-\subsection{Popis komunikačního protokolu}
-
-Pro komunikaci mezi daemonem a skladem bylo potřeba navrhnout komunikační protokol. Obě strany budou komunikovat přes sériovou linku (UART) pomocí povelů. Předmětem komunikace pomocí UART je sice proud bytů, přesto jsem jako základní komunikační jednotku zvolil paket, který se bude skládat z několika bytů. Pro paket jsem rozhodl kvůli povaze komunikace (posílání povelů). Povely se totiž dají jednoduše posílat jako pakety.
-
-\subsubsection{Popis paketu}
-
-%schema paketu
-\vspace{3mm}
-\begin{center}
-\begin{tabular}{| l | l |}
-\hline
-1. byte & start byte \\ \hline
-2. byte & číslo paketu \\ \hline
-3. byte & číslo příkazu \\ \hline
-4. byte & délka argumentů / 1. argument \\ \hline
-5. - ?. byte & další argumenty \\ \hline
-\end {tabular}
-\\
-\vspace{1mm}
-\caption{Tabulka 1: Popis paketu}
-\end{center}
-
-
-Každý paket je tvořen byty. Maximální délka každého paketu je 64 bytů.
-Přestože komunikace probíhá po sériové lince, která je krátká a neměly by nastávat žádné chyby, jsou v paketu zahrnuty bezpečností prvky, které by případné chyby měly eliminovat.
-Paket vždy začíná bytem 0x80 (start byte), který by měl zajišťovat to, že v případě neočekávaného vložení nebo odstranění bytu z datového proudu žádná strana nebude číst stream 'posunutě' (tím by se zásadně změnil význam paketu). Hodnota 0x80 je zvolena kvůli svému zápisu v binární soustavě (01000000), který je speciální a je málo pravděpodobné, že by taková posloupnost bitů vznikla chybou (např. šumem).
-2. bytem je číslo paketu, které je zde také kvůli bezpečnosti. Pokud totiž jedna strana pošle paket, na který má druhá strana odpovědět dalším paketem, je potřeba, aby první strana věděla, jestli, a na jaký paket jí přichází odpověd. Jelikož se do 1 bytu vejde jen hodnota do 255, bude toto číslo přetékat. To by ale neměl být problém (pravděpodobnost, že by jeden paket 'předběhl' 255 dalších je zanedbatelná).
-3. bytem je číslo příkazu (viz tabulku číslo 2).
-Dalšími byty jsou argumetry příkazu. Pokud je z čísla příkazu možné jednoznačně určit počet argumentů, hned 4. bytem začínají argumenty. Pokud ne, ve 4. bytu je délka argumentů, které začínají až 5. bytem.
-
-
-Dalším bezpečnostím prvkem jsou také příkazy ACK a NACK, které jsou poslány jako odpověd na každý příkaz.
-
-\begin{center}
-\begin{tabular}{| l | l | p{10 cm} |}
-\hline
-Číslo příkazu & Název & Popis \\ \hline
-0x00 & NACK & not acknowledged - odpověď na příkaz, který nebyl úspěšně proveden; následuje kód chyby \\ \hline
-0x01 & ACK & acknowledged - odpověd na úspešně vykonaný příkaz, podle toho, na jaký příkaz odpovídá, může mít další argumenty \\ \hline
-0x02 & move & posun na dané místo, následují 2 byty s pozicí (Uint16) \\ \hline
-0x03 & pull & vytáhnutí kusu pásku z přihrádky, následují 2 byty s počtem dírek, které se mají vytáhnout (Uint16) \\ \hline
-0x04 & cut & ustřihnutí vytáhnutého kusu pásky, nemá argumenty \\ \hline
-0x05 & init & inicializaci - zařízení po startu dojede s hlavou na oba konce, aby zkalibrovalo motory a zjistilo přesnou polohu, nemá argumenty \\ \hline
-0x06 & power & napájení krokových motorů - příkaz je potřeba provést ještě před inicializací, nemá argumenty \\ \hline
-\end{tabular}
-\\
-\vspace{1mm}
-\caption{Tabulka 2: Přehled příkazů}
-\end{center}
-\vspace{6mm}
 
 
 \newpage

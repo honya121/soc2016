@@ -30,7 +30,7 @@
 7. 1. 4. Správa databáze typů součástek
 7. 1. 5. Statistiky a historie vkladů
 7. 1. 6. Integrace API velkých obchodů
-7. 2. Struktura webu (stručný popis komponent a jejich propojení)
+#7. 2. Struktura webu (stručný popis komponent a jejich propojení)
 7. 3. UX
 7. 3. 1. Responzivní design
 7. 3. 2. AJAX
