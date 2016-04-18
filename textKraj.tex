@@ -160,7 +160,7 @@ automatizace, skladování, SMD součástky, webová aplikace, evidence
 
 \section*{Abstract}
 
-The aim of this work is to develop a web application for automated storage machine for electronic parts, which simplifies manipulation and storage of these parts. Storage machine is designed to store solid mounted devices (SMDs). These parts are very small and manual storage is difficult and inefficient. The advantages of the storage machine are instant part retrieval, automatic storage of data about each part amount and non-problematic usage of the storage machine by multiple users.
+The aim of this work is to develop a web application for automated storage machine for electronic parts, which simplifies manipulation and storage of these parts. Storage machine is designed to store surface mounted devices (SMDs). These parts are very small and manual storage is difficult and inefficient. The advantages of the storage machine are instant part retrieval, automatic storage of data about each part amount and non-problematic usage of the storage machine by multiple users.
 
 \paragraph{Keywords:}
 
@@ -220,14 +220,14 @@ Celý projekt jsme rozdělili na 3 části. Mojí prací na tomto projektu je na
 
 \begin{minipage}{\textwidth}
 \begin{center}
-\includegraphics[scale=0.40]{img/sklad.JPG}
+\includegraphics[scale=0.10]{img/sklad.JPG}
 \\
 \caption{Obr. 1: přední pohled na sklad}
 \end{center}
 \end{minipage}
 \vspace{4mm}
 
-Sklad je zhruba 1,5 m dlouhý a 0,5 m široký. Součástky jsou skladovány v zadní části buď volně (krátké ústřižky), nebo na kotoučích. V přední části se na kolejnicích pohybuje stříhací hlava, která pásky vytahuje a následně stříhá. V levé části skladu je umístěn elektrický zdroj, servomotory s drivery\footnote{Servomotor je typ nízkootáčkového motoru. Servomotor je nutné řídit speciální elektronikou (drivery).}, elektroniku a microPC Raspberry Pi, na kterém běží řídící aplikace. Sklad lze rozšiřovat o další patra, takže kapacita skladu je variabilní. V každém patře je 70 přihrádek, takže není problém vyrobit sklad se stovkami přihrádek.
+Sklad je zhruba 1,5 m dlouhý a 0,5 m široký. Součástky jsou skladovány v zadní části buď volně (krátké ústřižky), nebo na kotoučích. V přední části se na kolejnicích pohybuje stříhací hlava, která pásky vytahuje a následně stříhá. V levé části skladu je umístěn elektrický zdroj, servomotory s drivery\footnote{Servomotor je typ nízkootáčkového motoru. Servomotor je nutné řídit speciální elektronikou (drivery).}, elektroniku a microPC Raspberry Pi\cite{raspi}, na kterém běží řídící aplikace. Sklad lze rozšiřovat o další patra, takže kapacita skladu je variabilní. V každém patře je 70 přihrádek, takže není problém vyrobit sklad se stovkami přihrádek.
 
 \subsection{Můj podíl}
 
@@ -244,41 +244,48 @@ Nejdříve jsem si definoval požadavky na funkce a jiné vlastnosti aplikace, a
 \begin{enumerate}
 \item \textbf{uživatelské rozhraní} - Sebelepší aplikace se neobejde bez uživatelů. Proto je jednou z hlavních uživatelská přívětivost. Aplikace by měla být přehledná a její používání rychlé a intuitivní.
 \item \textbf{mnoho funkcí} - Jádro aplikace umožní uživateli vybrat součástku ze skladu. Aplikace by ale mohla uživateli dále usnadnit používání skladu mnoha přidanými funkcemi (např. databáze součástek, integrace API\footnote{Application programming interface - rozhraní, pomocí kterého mohou cizí aplikace jednoduše přistupovat k funkcím obchodu} obchodů s elektronickými součástkami).
-\item \textbf{rozumná rychlost} - Přestože je rychlost celého skladu limitována hlavně rychlostí stříhací hlavy, měla by aplikace stíhat zpracovávat přístupy vícero uživatelů v rozumném čase, aby nezpomalovala práci uživatelů.
+\item \textbf{rozumná rychlost} - Přestože je rychlost celého skladu limitována hlavně rychlostí stříhací hlavy, měla by aplikace stíhat zpracovávat přístupy více uživatelů v rozumném čase, aby nezpomalovala práci uživatelů.
 \item \textbf{nízké nároky} - Hardware, na kterém aplikace běží, by měl spotřebovávat co nejméně elektřiny a neměl by zabírat moc místa. Také by měl být levný, aby se jeho cena minimálně promítla do celkové ceny skladu.
 \item \textbf{dostupnost} - Uživatel by neměl být omezován ve výběru zařízení, se kterým bude sklad ovládat. Aplikace by měla být dostupná na všechny typy zařízení.
 \end{enumerate}
 
 \subsection{Možné přístupy}
 
-Po definování požadavků na aplikaci úřipadalo v úvahu několik možností, jak by aplikace vypadala:
+Po definování požadavků na aplikaci připadalo v úvahu několik možností, jak by aplikace mohla být navrhnuta:
 
 \begin{enumerate}
 \item \textbf{Server + klientská aplikace} - Na skladu běží jen serverová část aplikace, která nízkoúrovňově komunikuje s klientskou aplikací. Tento přístup nemá velké nároky na sklad a je rychlý. Problém nastává u přenositelnosti aplikace. Pro každé zařízení by bylo potřeba psát novou klientskou aplikaci. Obecně je také složitější navrhnout kvalitní uživatelské prostředí pro nativní aplikace\footnote{Aplikace běžící přímo na zařízení. Protikladem mohou být například webové aplikace}.
-\item \textbf{Modul pro eshop systém} - Další možností bylo využít jako frontend/footnote{Část aplikace, která komunikuje s uživatelem (uživatelské rozhraní). Protikladem je backend, který obvykle provádí vnitřní procesy aplikace.} již existující eshopový systém a rozšířít jej o modul zajišťující komunikaci se skladem. Výhodou je zdánlivě velmi podobná architektura, kdy si uživatel vybírá součástky a poté si je koupí (vybere ze skladu). Při bližším pohledu jsou bohužel vidět rozdíly: eshopové systémy kladou velký důraz na způsob dopravy, platbu, ceny, aj.
+\item \textbf{Modul pro eshop systém} - Další možností bylo využít jako frontend\footnote{Část aplikace, která komunikuje s uživatelem (uživatelské rozhraní). Protikladem je backend, který obvykle provádí vnitřní procesy aplikace.} již existující eshopový systém a rozšířít jej o modul zajišťující komunikaci se skladem. Výhodou je zdánlivě velmi podobná architektura, kdy si uživatel vybírá součástky a poté si je koupí (vybere ze skladu). Při bližším pohledu jsou bohužel vidět rozdíly: eshopové systémy kladou velký důraz na způsob dopravy, platbu, ceny, aj.
 \item \textbf{Webová aplikace} - Nakonec jsem se rozhodl jít cestou webové aplikace. Hlavní výhoda spočívá v dostupnosti ze všech zařízení, ale i v přívětivosti uživatelského prostředí. Přestože náročnost je o trochu větší, než u prvního přístupu, stále se jedná o rychlé a relativně nenáročné řešení.
 \end{enumerate}
 
 
 \subsection{Použitý hardware a software}
 
-Jako zařízení, na kterém aplikace poběží, jsem zvolil microPC Raspberry Pi. Výkon Raspberry Pi je pro webovou aplikaci dostatečný a spotřeba nepřekračuje 5 W, takže je energeticky nenáročné. Výhodou je také cena, která se pohybuje okolo 1000 Kč. Pro Raspberry Pi existuje linuxová distribuce\footnote{linuxová distribuce - operační systém postavený na jádře Linux} Raspbian, která poskytuje široký výběr softwaru.
+Jako zařízení, na kterém aplikace poběží, jsem zvolil microPC Raspberry Pi. Výkon Raspberry Pi je pro webovou aplikaci dostatečný a spotřeba nepřekračuje 5 W, takže je energeticky nenáročné. Výhodou je také cena, která se pohybuje okolo 1000 Kč. Pro Raspberry Pi existuje linuxová distribuce\footnote{linuxová distribuce - operační systém postavený na jádře Linux} Raspbian\cite{raspbian}, která poskytuje široký výběr softwaru.
 
 Místo abych některé součásti aplikace psal sám a znovu vynalézal kolo, snažil jsem se využít již dostupný software. Některé volby konkrétního softwaru mají svá opodstatnění. Jindy jsem si vybíral jednoduše podle toho, jestli již mám s nějakým softwarem zkušenosti:
 
 \begin{enumerate}
-\item \textbf{Apache web server} - standardní linuxový web server
-\item \textbf{jazyk PHP} - asi nejpoužívanější jazyk pro psaní webových aplikací. Pro jazyk PHP existuje mnoho knihoven a frameworků\footnote{framework - nástavba na určitý jazyk, která usnadňuje vývoj aplikací}.
-\item \textbf{Nette Framework} - jednoduchý, ale kvalitní framework pro jazyk PHP
-\item \textbf{Bootstrap} - knihovna CSS slplp
-\item \textbf{Doctrine 2} - PHP knihovna pro definování databázové struktury
-\item \textbf{MySQL} - databázový server
-\item \textbf{jazyk Python} - skriptovací jazyk. Užitečný při tvorbě výkonově nenáročných aplikací
+\item \textbf{Apache web server}\cite{apache} - standardní linuxový web server
+\item \textbf{jazyk PHP}\cite{php} - asi nejpoužívanější jazyk pro psaní webových aplikací. Pro jazyk PHP existuje mnoho knihoven a frameworků\footnote{framework - nástavba na určitý jazyk, která usnadňuje vývoj aplikací}.
+\item \textbf{Nette Framework}\cite{nette} - jednoduchý, ale kvalitní framework pro jazyk PHP
+\item \textbf{Bootstrap}\cite{bootstrap} - knihovna CSS
+\item \textbf{Doctrine 2}\cite{doctrine} - PHP knihovna pro definování databázové struktury
+\item \textbf{MySQL}\cite{mysql} - databázový server
+\item \textbf{jazyk Python}\cite{python} - skriptovací jazyk. Užitečný při tvorbě výkonově nenáročných aplikací
 \end{enumerate}
 
 \subsection{Struktura aplikace}
 
-tady bude obrázek
+\begin{minipage}{\textwidth}
+\begin{center}
+\includegraphics[scale=0.40]{img/structure.png}
+\\
+\caption{Obr. 2: struktura aplikace}
+\end{center}
+\end{minipage}
+\vspace{4mm}
 
 Aplikaci jsem rozdělil na několik částí, které budou vykonávat různé funkce a budou vzájemně komunikovat:
 \begin{enumerate}
@@ -366,7 +373,7 @@ Dalším bezpečnostím prvkem jsou také příkazy ACK a NACK, které jsou posl
 0x02 & move & posun na dané místo, následují 2 byty s pozicí (Uint16) \\ \hline
 0x03 & pull & vytáhnutí kusu pásku z přihrádky, následují 2 byty s počtem dírek, které se mají vytáhnout (Uint16) \\ \hline
 0x04 & cut & ustřihnutí vytáhnutého kusu pásky, nemá argumenty \\ \hline
-0x05 & init & inicializaci - zařízení po startu dojede s hlavou na oba konce, aby zkalibrovalo motory a zjistilo přesnou polohu, nemá argumenty \\ \hline
+0x05 & init & inicializace - zařízení po startu dojede s hlavou na oba konce, aby zkalibrovalo motory a zjistilo přesnou polohu, nemá argumenty \\ \hline
 0x06 & power & napájení krokových motorů - příkaz je potřeba provést ještě před inicializací, nemá argumenty \\ \hline
 \end{tabular}
 \\
@@ -401,23 +408,34 @@ Třetí a největší komponenta celé aplikace je webové rozhraní. Jak již j
 
 \subsection{Nette Framework}
 
-Nette je český framework pro psaní webových aplikací v PHP. Jeho hlavní prioritou je jednoduchost, což narozdíl od konkurenčních frameworků, které se zaměřují spíše na co nejvíce funkcí, splňuje. Zároveň však nepostrádá žádnou funkci, kterou bych při vývoji webového rozhraní potřeboval. Prvním krokem k vytvoření funkční webové aplikace je založení projektu pomocí Composeru, který zároveň vyřeší závislosti na dalším softwaru. Vytvoří se adresářová struktura a poté již stačí psát aplikaci pomocí nově definovaných tříd. Každá aplikace v Nette by měla dodržovat rozdělení komponent na Model-View-Controller/footnote{MVC - architektura při vytváření aplikací s uživatelským rozhraním. Viz kap. 3.5}. Aplikace se primárně dělí na presentery, které načítají data z databáze pomocí modelu a připraví je tak, aby je na ně napojené šablony mohly jednoduše zobrazit. Uživatel tedy vidí šablonu, která je naplněna daty z presenteru.
+Nette je český framework pro psaní webových aplikací v PHP. Jeho hlavní prioritou je jednoduchost, což narozdíl od konkurenčních frameworků, které se zaměřují spíše na co nejvíce funkcí, splňuje. Zároveň však nepostrádá žádnou funkci, kterou bych při vývoji webového rozhraní potřeboval. Prvním krokem k vytvoření funkční webové aplikace je založení projektu pomocí Composeru, který zároveň vyřeší závislosti na dalším softwaru. Vytvoří se adresářová struktura a poté již stačí psát aplikaci pomocí nově definovaných tříd. Každá aplikace v Nette by měla dodržovat rozdělení komponent na Model-View-Controller\footnote{MVC - architektura při vytváření aplikací s uživatelským rozhraním. Viz kap. 3.5}. Aplikace se primárně dělí na presentery, které načítají data z databáze pomocí modelu a připraví je tak, aby je na ně napojené šablony mohly jednoduše zobrazit. Uživatel tedy vidí šablonu, která je naplněna daty z presenteru.
 
 \subsection{Autentifikace a autorizace}
 
 Kvůli bezpečnosti jsem přístup do aplikace omezil uživatelskými účty. Člověk bez uživatelského účtu se do aplikace vůbec nedostane. Dále jsou definovány 3 úrovně uživatelských práv, aby se rozlišilo mezi lidmi, kteří sklad užívají a těmi, kteří se o něj starají a potřebují mít zpřístupněno více funkcí. Kromě lepší bezpečnosti (obyčejný uživatel bude moci napáchat mnohem méně škod) to také zpřehlední uživatelské rozhraní, protože uživatel nebude zbytečně zatěžován mnoha tlačítky, která nevyužije.
 
-Webová aplikace tedy bude ozlišovat mezi těmito uživatelskými rolemi:
+Webová aplikace tedy bude rozlišovat mezi těmito uživatelskými rolemi:
 
 \begin{enumerate}
 \item \textbf{uživatel} - základní uživatelský účet. Má možnost vybírat součástky a prohlížet statistiku a databázi součástek.
-\item \textbf{správce} - správcovský účet. Má možnost doplňovat součástky, manipulovat s rozložením součástek v přihrádek a měnit databázi součástek. Na email mu budou chodit vybraná upozornění.
+\item \textbf{správce} - správcovský účet. Má možnost doplňovat součástky, manipulovat s rozložením součástek v přihrádkách a měnit databázi součástek. Na email mu budou chodit vybraná upozornění.
 \item \textbf{administrátor} - nejmocnější účet. Může dělat všechno, co správce i uživatel, ale navíc bude moci přidávat, upravovat i mazat uživatelské účty.
 \end{enumerate}
 
 \subsection{Uživatelské rozhraní}
 
-Důležitou součástí vývoje aplikace byl návrh uživatelského rozhraní. Snažil jsem se uživatelské rozhraní udělat co nejjednodušší a nejpřehlednější (někdy i na úkor estetiky). Také jsem se snažil propojit části webové aplikace tak, aby uživatel nemusel zbytečně moc klikat. Při návrhu jsem použil CSS knihovnu Bootstrap, se kterou se dá relativně jednoduše vytvořit čistý a přehledný design webu. Hlavním navigačním prvkem webu je horní lišta, která obsahuje odkazy na všechy části webu. Zbytek prostoru je vyplněn vždy danou částí webu. K vytváření seznamů jsem použil rozšíření pro Nette Framework Mesour Datagrid, které umožňuje vytvářet chytré seznamy s tříděním a filtrováním. K reprezentování dat různými grafy jsem použil knihovnu D3.js.
+Důležitou součástí vývoje aplikace byl návrh uživatelského rozhraní. Snažil jsem se uživatelské rozhraní udělat co nejjednodušší a nejpřehlednější (někdy i na úkor estetiky). Také jsem se snažil propojit části webové aplikace tak, aby uživatel nemusel zbytečně moc klikat. Při návrhu jsem použil CSS knihovnu Bootstrap, se kterou se dá relativně jednoduše vytvořit čistý a přehledný design webu. Hlavním navigačním prvkem webu je horní lišta, která obsahuje odkazy na všechy části webu. Zbytek prostoru je vyplněn vždy danou částí webu. K vytváření seznamů jsem použil rozšíření pro Nette Framework Mesour Datagrid\cite{mesour}, které umožňuje vytvářet chytré seznamy s tříděním a filtrováním. K reprezentování dat různými grafy jsem použil knihovnu D3.js\cite{d3}.
+
+\vspace{6mm}
+\begin{minipage}{\textwidth}
+\begin{center}
+\hspace*{-2cm}
+\includegraphics[scale=0.55]{img/web_navbar.png}
+\\
+\caption{Obr. 3: Navigační lišta}
+\end{center}
+\end{minipage}
+\vspace{4mm}
 
 \subsubsection{AJAX}
 
@@ -434,7 +452,7 @@ Největší výhoda knihovny Bootstrap je že za vývojáře velmi jednoduše vy
 \begin{minipage}{\textwidth}
 \begin{center}
 \hspace*{-2cm}
-\includegraphics[scale=0.69]{img/use_case_uml.png}
+\includegraphics[scale=0.55]{img/use_case_uml.png}
 \\
 \caption{Obr. 4: Use case diagram aplikace}
 \end{center}
@@ -448,13 +466,32 @@ Vybírání součástek je hlavní funkce celé aplikace. Proto jsem se snažil,
 \begin{enumerate}
 \item \textbf{podle typu} - Z jednoduché tabulky všech součástek si uživatel vybere, co potřebuje. Bude mít možnost tabulku filtrovat podle typu součástky (rezistor, kondenzátor, aj.).
 \item \textbf{podle vlastnosti} - Uživatel si nejdříve vybere, který druh součástky potřebuje. Podle vybraného druhu se mu zobrazí složitá tabulka se součástkami daného druhu a jejich vlastnostmi. Tuto možnost využijí hlavně lidé, kteří potřebují součástku o daných parametrech, ale nevědí, zda ve skladu nějaká vyhovující je
-\item \textbf{ze souboru} - Uživatel jednoduše nahraje partlist soubor (viz úvod) projektu, na kterém pracuje. Vůbec tedy není potřeba vybírat součástky z tabulek.
+\item \textbf{ze souboru} - Uživatel jednoduše nahraje partlist soubor (viz Úvod) projektu, na kterém pracuje. Vůbec tedy není potřeba vybírat součástky z tabulek.
 \end{enumerate}
+
+\begin{minipage}{\textwidth}
+\begin{center}
+\hspace*{-2cm}
+\includegraphics[scale=0.55]{img/web_vybrat_soucastky.png}
+\\
+\caption{Obr. 5: Vybírání součástek}
+\end{center}
+\end{minipage}
+\vspace{4mm}
 
 \subsubsection{Doplňování součástek}
 
 V případě, že nějaká součástka dochází, stačí, aby správce skladu vyměnil kotouč a na webu zadal nové množství součástek v přihrádce. Není třeba jakkoli manipulovat s rozložením součástek ve skladu.
 
+\begin{minipage}{\textwidth}
+\begin{center}
+\hspace*{-2cm}
+\includegraphics[scale=0.55]{img/web_doplnit_soucastky.png}
+\\
+\caption{Obr. 6: Doplnění součástek}
+\end{center}
+\end{minipage}
+\vspace{4mm}
 
 \subsubsection{Databáze součástek}
 
@@ -470,32 +507,81 @@ Web umí vykreslovat mnoho různých grafů a generovat výtahy z dat o výběre
 
 \subsection{Optimalizace výkonu}
 
-Při testování aplikace na Raspberry Pi se bohužel objevily problémy s rychlostí aplikace. Načítání stránky trvalo i 5 sekund a celkově byla aplikace pomalá. Zjistil jsem, že problém není v rychosti procesoru nebo nedostatku operační paměti, ale v rychlosti SD karty. Nette Framework využívá pro vylepšení výkonu cachování\footnote{cachování - ukládání výpočtů na disk a pozdější opětovné využití za účelem snížení nároků na výpočetní výkon}, takže si ukládá velké množství souborů krátkodobě na SD kartu. Na běžném serveru se standardním hard diskem by to nebyl problém, ale na Raspberry Pi s pomalou SD kartou to výrazně zpomaluje celou aplikaci. Proto jsem na Raspberry Pi nainstaloval PHP OPCache, která způsobuje, že se ke cachování místo SD karty využívá operační pamět, která je mnohonásobně rychlejší. Problém se tímto vyřešil a aplikace teď běží dostatečně rychle.
-
-
+Při testování aplikace na Raspberry Pi se bohužel objevily problémy s rychlostí aplikace. Načítání stránky trvalo i 5 sekund a celkově byla aplikace pomalá. Zjistil jsem, že problém není v rychosti procesoru nebo nedostatku operační paměti, ale v rychlosti SD karty. Nette Framework využívá pro vylepšení výkonu cachování\footnote{cachování - ukládání výpočtů na disk a pozdější opětovné využití za účelem snížení nároků na výpočetní výkon}, takže si ukládá velké množství souborů krátkodobě na SD kartu. Na běžném serveru se standardním hard diskem by to nebyl problém, ale na Raspberry Pi s pomalou SD kartou to výrazně zpomaluje celou aplikaci. Proto jsem na Raspberry Pi nainstaloval PHP OPCache\cite{opcache}, která způsobuje, že se ke cachování místo SD karty využívá operační pamět, která je mnohonásobně rychlejší. Problém se tímto vyřešil a aplikace teď běží dostatečně rychle.
 
 \newpage
+
+\section{Testovací web}
+
+Webovou aplikaci si můžete vyzkoušet na adrese http://212.158.133.177/sklad.
+
+Uživatelské údaje pro uživatele: user:54321
+
+Uživatelské údaje pro správce: manager:654321
 
 \section*{Závěr} %co do budoucna, splneni cilu
 \addcontentsline{toc}{section}{Závěr}
 
 Sklad momentálně funguje na Domu dětí a mládeže Helceletova a využívá se. Aplikaci dále vyvíjím podle požadavků uživatelů.
 
-V blízké budoucnosti bych chtěl především přidat možnost součástky si rezervovat na nějaký projekt a poté je hromadně vydat. Také bych chtěl postupně integrovat API více obchodů s elektronickými součástkami a zvyšit tak výběr pro zákazníka. Další možností v rozvoji je přizpůsobení aplikace pro využití ve fyzických obchodech s elektronickými součástkami k prodeji SMD součástek.
+V blízké budoucnosti bych chtěl především přidat možnost součástky si rezervovat na nějaký projekt a poté je hromadně vydat. Také bych chtěl postupně integrovat API více obchodů s elektronickými součástkami a zvyšit tak výběr pro zákazníka. Další možností v rozvoji je přizpůsobení aplikace pro využití v kamenných obchodech s elektronickými součástkami.
 
 
 \newpage
 
-\section*{Seznam použité literatury a softwaru}
+\begin{thebibliography}{99}
 
-\begin{itemize}
-\item Oficiální webové stránky projektu Raspberry Pi - http://www.raspberrypi.org/
-\item Oficiální webové stránky jazyka PHP - http://php.net/
-\item Oficiální webové stránky jazyka Python - https://www.python.org/
-\item Oficiální webové stránky frameworku Nette - http://nette.org/cs/
-\item Oficiální webové stránky databázového serveru MySQL - http://www.mysql.com/
-\item Oficiální webové stránky knihovny Bootstrap - http://getbootstrap.com/
-\item Oficiální webové stránky modelovacího programu Modelio - https://www.modelio.org/
-\end{itemize}
+\bibitem{raspi}
+\emph{Raspberry Pi} [online]. [cit. 2016-04-15]. Dostupné z: https://www.raspberrypi.org/
+
+\bibitem{raspbian}
+
+\emph{Raspbian} [online]. [cit. 2016-04-15]. Dostupné z: https://www.raspbian.org/
+
+\bibitem{apache}
+
+\emph{Apache Web Server} [online]. [cit. 2016-04-15]. Dostupné z: https://httpd.apache.org/
+
+\bibitem{php}
+
+\emph{PHP} [online]. [cit. 2016-04-15]. Dostupné z: http://php.net/
+
+\bibitem{nette}
+
+\emph{Nette Framework} [online]. [cit. 2016-04-15]. Dostupné z: https://nette.org/cs/
+
+\bibitem{bootstrap}
+
+\emph{Bootstrap} [online]. [cit. 2016-04-15]. Dostupné z: http://getbootstrap.com/
+
+\bibitem{mysql}
+
+\emph{MySQL} [online]. [cit. 2016-04-15]. Dostupné z: https://www.mysql.com/
+
+\bibitem{d3}
+
+\emph{D3.js} [online]. [cit. 2016-04-15]. Dostupné z: https://d3js.org/
+
+\bibitem{mesour}
+
+\emph{Mesour DataGrid} [online]. [cit. 2016-04-15]. Dostupné z: http://grid.mesour.com/
+
+\bibitem{opcache}
+
+\emph{PHP OPcache} [online]. [cit. 2016-04-15]. Dostupné z: http://php.net/manual/en/book.opcache.php
+
+\bibitem{doctrine}
+
+\emph{Doctrine [online]}. [cit. 2016-04-15]. Dostupné z: http://www.doctrine-project.org/
+
+\bibitem{python}
+
+\emph{Python} [online]. [cit. 2016-04-15]. Dostupné z: https://www.python.org/
+
+\end{thebibliography}
+
+\newpage
+\newpage
+
 
 \end{document}
